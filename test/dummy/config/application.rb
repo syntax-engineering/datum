@@ -7,6 +7,11 @@ require "datum"
 
 module Dummy
   class Application < Rails::Application
+
+    # Added as part of datum install, enables access to datum specific models
+    config.autoload_paths += %W(#{Rails.root}/test/lib/datum/models)
+
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
