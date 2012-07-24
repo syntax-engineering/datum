@@ -1,4 +1,4 @@
-# Datum is currently under development and pre-1.0
+##### Datum is currently under development and pre-1.0
 
 ## Datum
 
@@ -15,6 +15,10 @@ Datum is a simple take on Data Driven Testing for Rails. Datum:
 Datum is still in development. Currently, we're working with Rails 3.2.6 and Ruby 1.9.3.
 
 ### Getting Started
+
+Datum is a simple tool for data driven testing. If you have a test case that you can parameterize and want to manage your parameters via a database, Datum is fun.
+
+#### Setting Up
 
 Add Datum to your Gemfile:
 
@@ -34,6 +38,8 @@ Enable will create several directories in your test directory. It will also prom
 
 When finished, you are ready to create a Datum specific database and add migrations and models. 
 
+#### Creating a Datum Specific Database and Tables
+
 To create a Datum specific database:
 
 ```console
@@ -52,4 +58,70 @@ Models and migrations are placed in your application under test/lib/datum/models
 rake datum:db:migrate
 ```
 
-You are now ready to put data in the table. 
+You are now ready to put data in a newly created table.
+
+#### Binding a Test Case to a Table
+
+When writing a unit test or functional test *with Test::Unit*, bind your test case to your table with drive_with.
+
+```ruby
+test "vote_counter should count positive votes" do
+  drive_with :table_items
+```
+
+Once bound to your table, drive_with will work with the Datum infrastructure so that your test case will execute once for every row in the table.
+
+To access the current row, use the datum accessor:
+
+```ruby
+test "vote_counter should count positive votes" do
+  drive_with :table_items
+  puts "starting test case..."
+  puts "the current id of the row: #{datum.id}"
+```
+
+Will output:
+
+```console
+  starting test case...
+  1
+  
+  starting test case...
+  2
+  
+  starting test case...
+  3
+```
+
+#### Move Datum Table Data Beyond the Datum Database
+
+To convert your Datum tables to fixtures (for storage in scc, etc)
+
+```console
+rake datum:db:dump
+```
+
+To get Datum data from fixtures into the Datum specific database:
+
+```console
+rake datum:db:load
+```
+
+To convert a Datum table into a file so that drive_with does *not* use the table (and is thus *not* dependent on a Datum database / settings / etc) 
+
+```console
+rake datum:db:localize[table_items]
+```
+
+### Troubleshooting
+
+#### In Development
+Datum is still being created and isn't officially *ready*. It's likely that we have code paths that are not fully tested and some that are plain broken. Stay tuned for a 1.0.
+
+### Additional Information
+
+#### Tyemill
+Tyemill is a technology company in Seattle, Washington. We make a few line-of-business applications and love Ruby, Rails and Open Source.
+
+## License
+MIT License. Copyright 2012 Tyemill LLC. http://tyemill.com
