@@ -14,11 +14,11 @@ Datum is a simple take on Data Driven Testing for Rails. Datum:
 
 Datum is still in development. Currently, we're working with Rails 3.2.6 and Ruby 1.9.3.
 
-### Getting Started
+## Getting Started
 
 Datum is a simple tool for data driven testing. If you have a test case that you can parameterize and want to manage your parameters via a database, Datum is fun.
 
-#### Setting Up
+### Setting Up
 
 Add Datum to your Gemfile:
 
@@ -38,7 +38,7 @@ Enable will create several directories in your test directory. It will also prom
 
 When finished, you are ready to create a Datum specific database and add migrations and models. 
 
-#### Creating a Datum Specific Database and Tables
+### Creating a Datum Specific Database and Tables
 
 To create a Datum specific database:
 
@@ -60,7 +60,7 @@ rake datum:db:migrate
 
 You are now ready to put data in a newly created table.
 
-#### Binding a Test Case to a Table
+### Binding a Test Case to a Table
 
 When writing a unit test or functional test *with Test::Unit*, bind your test case to your table with drive_with.
 
@@ -93,7 +93,7 @@ Will output:
   3
 ```
 
-#### Move Datum Table Data Beyond the Datum Database
+### Move Datum Table Data Beyond the Datum Database
 
 To convert your Datum tables to fixtures (for storage in scc, etc)
 
@@ -113,14 +113,14 @@ To convert a Datum table into a file so that drive_with does *not* use the table
 rake datum:db:localize[table_items]
 ```
 
-### Troubleshooting
+## Troubleshooting
 
-#### In Development
+### In Development
 Datum is still being created and isn't officially *ready*. It's likely that we have code paths that are not fully tested and some that are plain broken. Stay tuned for a 1.0.
 
-### Additional Information
+## Additional Information
 
-#### Tyemill
+### Tyemill
 Tyemill is a technology company in Seattle, Washington. We make a few line-of-business applications and love Ruby, Rails and Open Source.
 
 ## License
