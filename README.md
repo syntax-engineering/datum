@@ -12,7 +12,9 @@ Datum is a simple take on Data Driven Testing for Rails. Datum:
 
 ## Rails 3
 
-Datum is still in development. Currently, we're working with Rails 3.2.6 and Ruby 1.9.3.
+Datum is still in development. Currently, we're working with Rails 3.2.6 and Ruby 1.9.3. 
+
+For now, our target test framework is <b>Test::Unit</b>.
 
 ## Getting Started
 
@@ -62,7 +64,7 @@ You are now ready to put data in a newly created table.
 
 ### Binding a Test Case to a Table
 
-When writing a unit test or functional test *with Test::Unit*, bind your test case to your table with drive_with.
+When writing a unit test or functional test with <b>Test::Unit</b>, bind your test case to your table with drive_with.
 
 ```ruby
 test "vote_counter should count positive votes" do
@@ -107,7 +109,7 @@ To get Datum data from fixtures into the Datum specific database:
 rake datum:db:load
 ```
 
-To convert a Datum table into a file so that drive_with does *not* use the table (and is thus *not* dependent on a Datum database / settings / etc) 
+To convert a Datum table into a file so that drive_with does <b>not</b> use the table (and is thus <b>not</b> dependent on a Datum database / settings / etc) 
 
 ```console
 rake datum:db:localize[table_items]
