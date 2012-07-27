@@ -4,16 +4,23 @@ module Datum
   # intended to be used as part of enable to report datum readiness
   class VerificationTask
 
-    def verify
+
+    def disable_user_questions
+      @@ask_user = false
+    end    
+
+    def rock
       
       puts "\n### !!!Datum Verification !!!"
       puts "### !!!This command DROPS the Datum Database!!!"
-      puts "\n>>>>>>>>>>>>>>>> Proceed with Datum Verification? y/n"
-      continue = STDIN.gets.chomp
-      
-      unless continue == 'y' || continue == 'yes'
-        puts "\n ... Canceling Datum Verification\n "
-        exit!
+
+      if @@ask_user
+        puts "\n>>>>>>>>>>>>>>>> Proceed with Datum Verification? y/n"
+        continue = STDIN.gets.chomp
+        unless continue == 'y' || continue == 'yes'
+          puts "\n ... Canceling Datum Verification\n "
+          exit!
+        end
       end
       
       database_ready = false
@@ -101,6 +108,7 @@ module Datum
     end
 
     private
+    @@ask_user = true
     @@local_path = "#{Rails.root}/test/lib/datum"
     @@gem_path = File.expand_path(File.dirname(__FILE__))
     @@migration_file = "20120726105125_create_datum_versions.rb"

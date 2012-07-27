@@ -2,6 +2,18 @@
 module Datum
   class EnableTask
 
+    def disable_user_questions
+      @@ask_user = false
+    end
+
+    def disable_verification
+      @@use_verification = false
+    end
+
+    def datum_directories
+      return @@directories
+    end
+
     def rock
       puts "\n Enabling Datum Data-Driven Testing Tools."
       create_directories
@@ -9,13 +21,18 @@ module Datum
       update_yml if @@update_yml
       update_app if @@update_app
 
-      (Datum::VerificationTask.new).verify
+      if @@use_verification
+        verifier = Datum::VerificationTask.new
+        verifier.disable_user_questions if !@@ask_user
+        verifier.rock
+      end
 
       puts " Datum enabled.\n "
     end
     
     private
-    @@application_path = @@info = nil
+    @@use_verification = @@ask_user = true
+    @@directories = @@application_path = @@info = nil
     @@update_app = @@update_yml = false
     @@datum_drop_path = "test/lib/datum"
     @@datum_model_path = 'config.autoload_paths += %W(#{Rails.root}/' + 
@@ -26,9 +43,12 @@ module Datum
     #"config.autoload_paths.*#{encoded_path}\/models"
     
     def create_directories
-      ["#{@@datum_drop_path}/fixtures", "#{@@datum_drop_path}/locals",
-      "#{@@datum_drop_path}/migrate", "#{@@datum_drop_path}/models"].each { 
-        |path| FileUtils.mkdir_p(path) if !File::directory?(path)}  
+      @@directories = ["#{@@datum_drop_path}/fixtures", "#{@@datum_drop_path}/locals",
+      "#{@@datum_drop_path}/migrate", "#{@@datum_drop_path}/models"]
+      
+      @@directories.each { 
+        |path| FileUtils.mkdir_p(path) if !File::directory?(path)
+      }  
       
       puts " Datum directories created."
     end
@@ -46,12 +66,15 @@ module Datum
       puts " Files that may need updates: "
       puts "   database.yml" if @@update_yml
       puts "   application.rb" if @@update_app
-      puts "\n>>>>>>>>>>>>>>>> Attempt updates for you? y/n"
-      continue = STDIN.gets.chomp
-      unless continue == 'y' || continue == 'yes'
-        puts "\n Files must be updated manually to fully enable Datum"
-        puts " Run rake task 'datum:db:verify' after manual update.\n "
-        exit!
+
+      if @@ask_user
+        puts "\n>>>>>>>>>>>>>>>> Attempt updates for you? y/n"
+        continue = STDIN.gets.chomp
+        unless continue == 'y' || continue == 'yes'
+          puts "\n Files must be updated manually to fully enable Datum"
+          puts " Run rake task 'datum:db:verify' after manual update.\n "
+          exit!
+        end
       end
     end
     
