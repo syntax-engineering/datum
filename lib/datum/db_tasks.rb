@@ -1,12 +1,13 @@
 
 module Datum
+  
   class DbTasks
     def initialize
       Rails.env = @@datum_environment
     end
     
     def create
-      Rake::Task['db:create'].invoke()
+      Rake::Task['db:create'].invoke()  
     end
     
     def migrate
@@ -73,10 +74,15 @@ module Datum
         f1.puts "]\nend\nend"
       end
     end
-    
+
     private
     @@local_path = "#{Rails.root}/test/lib/datum"
+    
     @@datum_environment = "datum"
     
+    def context
+      return Datum::Context
+    end
+
   end
 end

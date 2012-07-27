@@ -1,0 +1,14 @@
+# todo items
+#
+# 
+items = "\nTODO Items:
+
+1)
+2)
+3)
+4)
+
+-- gabriel@tyemill.com
+ "
+
+puts "#{items}"

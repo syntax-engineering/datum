@@ -38,8 +38,10 @@ module Datum
     def self.load_model_data table
       data = nil
       begin
+        log "load_model_data attempting to constantize"
         driver_method = table.to_s.singularize
         data = driver_method.classify.constantize.all.reverse
+        log "load_model_data data loaded"
       rescue Exception => exc
         log "load_model_data: could not get data from model #{driver_method}"
         log exc
@@ -53,18 +55,50 @@ module Datum
     def self.load_file_data table
       data = nil
       begin
-        require "lib/datum/locals/#{table}"
-        cls = driver_method.classify.pluralize.constantize
+        driver_method = table.to_s.singularize
+        log "load_file_data: attempting require..."
+        file = "lib/datum/locals/#{table}"
+        klas = driver_method.classify.pluralize
+        require file
+        log "load_file_data: require was successful"
+        cls = klas.constantize
+        log "load_file_data: classify pluralize constantize was successful"
         data = cls::data.reverse
+        log "load_file_data: data reading was successful"
         data = mock_data data
+        log "load_file_data: mocking was successful"
       rescue Exception => exc
         ## database-driven
-        log "load_file_data: file load failed. moving to database load."
+        log "load_file_data: file load failed for: #{file}"
+        log "load_file_data: driver_method: #{driver_method}"
+        log "load_file_data: class: #{klas}"
+        log "... attempting database connection."
       end
       
       return data
     end
     
+    def self.mock_data data
+      modified_data = []
+      data.each_with_index {|e, i|
+        o = Object.new
+        e.each_pair {|key, value|
+          addMockExtension key, value, o
+        }
+        modified_data.push o
+      }
+      return modified_data
+    end
+
+    def self.addMockExtension(ext, instance, obj)
+      method_name = ext.to_sym
+      obj.class.send :define_method, method_name do
+        return instance unless instance.to_i.to_s == instance || instance == ""
+        return nil if instance == ""
+        return instance.to_i
+      end
+    end
+
     private 
     
     def self.context

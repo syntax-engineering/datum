@@ -17,9 +17,9 @@ module Datum
       result = nil if @@table_data.nil?
       result = @@table_data.delete_at(0) unless @@table_data.nil?
       @@initialized = false if !result.nil? && @@table_data.count == 0
-      
+
       log "next row table_data: #{@@table_data}"
-      log "next row result: #{result.attributes}" unless result.nil?
+      #log "next row result: #{result.attributes}" unless result.nil?
       log "next row initialized: #{@@initialized}"
       return result
     end

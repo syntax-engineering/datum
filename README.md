@@ -38,6 +38,10 @@ rake datum:enable
 
 Enable will create several directories in your test directory. It will also prompt you to ask for permission to update your database.yml and application.rb. You MUST review both files even if you have Enable update them for you.
 
+Additionally, Enable will further prompt you for permission to verify all core Datum functionality. Verification will include all basic Datum rake tasks along with execution of tests that use Datum's drive_with. 
+
+<span style="color: red;">WARNING:</span> Enable's verification <b>WILL DROP the Datum Database</b>. If you are re-installing Datum, be sure to back-up your Datum store BEFORE running Enable.
+
 When finished, you are ready to create a Datum specific database and add migrations and models. 
 
 ### Creating a Datum Specific Database and Tables
@@ -94,7 +98,6 @@ Will output:
   starting test case...
   3
 ```
-
 ### Move Datum Table Data Beyond the Datum Database
 
 To convert your Datum tables to fixtures (for storage in scc, etc)

@@ -8,6 +8,9 @@ module Datum
       notify_check
       update_yml if @@update_yml
       update_app if @@update_app
+
+      (Datum::VerificationTask.new).verify
+
       puts " Datum enabled.\n "
     end
     
@@ -46,7 +49,8 @@ module Datum
       puts "\n>>>>>>>>>>>>>>>> Attempt updates for you? y/n"
       continue = STDIN.gets.chomp
       unless continue == 'y' || continue == 'yes'
-        puts "\n Files must be updated manually to fully enable Datum\n "
+        puts "\n Files must be updated manually to fully enable Datum"
+        puts " Run rake task 'datum:db:verify' after manual update.\n "
         exit!
       end
     end

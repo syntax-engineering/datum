@@ -23,7 +23,7 @@ module Datum
      datum_helper::load_data table if !datum_context::initialized?
      @@driver_row = datum_context.next_row
      log "drive_with table: #{table}"
-     log "drive_with row: #{@@driver_row.attributes}" unless @@driver_row.nil?
+     #log "drive_with row: #{@@driver_row.attributes}" unless @@driver_row.nil?
     end
     
     def datum

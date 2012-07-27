@@ -1,4 +1,4 @@
-
+require "datum/verification_task"
 require "datum/enable_task"
 require "datum/db_tasks"
 
@@ -25,14 +25,19 @@ namespace :datum do
     
     desc "Loads fixtures specific to datum database"
     task :load do invoke "load" end
-      
+    
+    #desc "Quick verification of basic datum functionality"
+    #task :verify do invoke "verify" end
+    
     desc "Enables datum execution without database dependency"
     task :localize, :table do |t, args|
       (Datum::DbTasks.new).localize args
     end
     
+    private
     def invoke method
       (Datum::DbTasks.new).send(method)
     end
+    
   end
 end
