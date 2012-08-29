@@ -8,4 +8,4 @@ end
 ## 0.8.2
 ## Fixed errors in verification / environment
 ## 0.8.3
-## Fixed fixture file bug
+## Added functionality in verification to handle existing datum files
