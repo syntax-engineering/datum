@@ -74,7 +74,9 @@ module Datum
       DatumVersion.create([
         {:version => "0.0.1"},
         {:version => "0.8.0"},
-        {:version => "0.8.1"}])
+        {:version => "0.8.1"},
+        {:version => "0.8.2"},
+        {:version => "0.8.3"}])
     end
 
     def exec_test
@@ -89,6 +91,12 @@ module Datum
     end
 
     def copy_verification_files
+      # need to make sure all existing fixtures are moved to prevent
+      # overwritting or unwanted data in verification process
+      FileUtils.cp_r "#{@@local_path}", "#{@@datum_tmp}"
+      FileUtils.remove_dir "#{@@local_path}"
+      (Datum::EnableTask.new).create_directories
+
       FileUtils.cp_r @@migration_src, "#{@@local_path}/migrate"
       FileUtils.cp_r @@model_src, "#{@@local_path}/models"
       FileUtils.cp_r @@test_src, "#{@@unit_dir}"
@@ -96,20 +104,18 @@ module Datum
 
     # delete: the migration, the fixture, the ruby file, the model
     def remove_verification_files
-      files = ["#{@@local_path}/migrate/#{@@migration_file}",
-        "#{@@local_path}/fixtures/#{@@fixture_file}",
-        "#{@@local_path}/locals/#{@@ruby_file}",
-        "#{@@local_path}/models/#{@@model_file}", @@test_drop]
 
-      files.each { |file|
-        context.log "Removing file: #{file}"
-        FileUtils.remove_file file  
-      }
+      # need to move fixtures back
+      FileUtils.remove_dir "#{@@local_path}"
+      FileUtils.cp_r "#{@@datum_tmp}", "#{@@local_path}"
+      FileUtils.remove_dir "#{@@datum_tmp}"
+      
     end
 
     private
     @@ask_user = true
     @@local_path = "#{Rails.root}/test/lib/datum"
+    @@datum_tmp = "#{Rails.root}/test/lib/datum_tmp"
     @@gem_path = File.expand_path(File.dirname(__FILE__))
     @@migration_file = "20120726105125_create_datum_versions.rb"
     @@version_str = "DatumVersion"

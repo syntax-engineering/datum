@@ -30,6 +30,18 @@ module Datum
       puts " Datum enabled.\n "
     end
     
+    def create_directories
+      @@directories = ["#{@@datum_drop_path}/fixtures", 
+        "#{@@datum_drop_path}/locals", "#{@@datum_drop_path}/migrate", 
+        "#{@@datum_drop_path}/models"]
+      
+      @@directories.each { 
+        |path| FileUtils.mkdir_p(path) if !File::directory?(path)
+      }  
+      
+      puts " Datum directories created."
+    end
+    
     private
     @@use_verification = @@ask_user = true
     @@directories = @@application_path = @@info = nil
@@ -42,17 +54,7 @@ module Datum
     #@@datum_drop_path.gsub(Regexp.new("\\/"), "\\/")
     #"config.autoload_paths.*#{encoded_path}\/models"
     
-    def create_directories
-      @@directories = ["#{@@datum_drop_path}/fixtures", 
-        "#{@@datum_drop_path}/locals", "#{@@datum_drop_path}/migrate", 
-        "#{@@datum_drop_path}/models"]
-      
-      @@directories.each { 
-        |path| FileUtils.mkdir_p(path) if !File::directory?(path)
-      }  
-      
-      puts " Datum directories created."
-    end
+
     
     def notify_check
       @@update_yml = need_yml?
