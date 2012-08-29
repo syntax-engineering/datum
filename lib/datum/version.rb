@@ -1,5 +1,5 @@
 module Datum
-  VERSION = "0.8.4"
+  VERSION = "0.8.5"
 end
 
 ## 0.8.1
@@ -11,3 +11,6 @@ end
 ## Added functionality in verification to handle existing datum files
 ## 0.8.4
 ## Fixed bug with leftover verification test case.
+## 0.8.5
+## Fixed bug with pre-existing datum database (verification failed when
+## pre-existing store exists)

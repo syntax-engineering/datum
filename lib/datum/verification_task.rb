@@ -29,6 +29,9 @@ module Datum
 
       begin
         dbtsks = DbTasks.new
+        puts "\n Dropping Existing Datum Database...\n "
+        dbtsks.drop
+        puts "\n Drop complete\n "
         puts "\n Verifing Datum functionality...\n "
         dbtsks.create 
         puts "   >> Database created"
