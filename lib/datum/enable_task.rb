@@ -43,8 +43,9 @@ module Datum
     #"config.autoload_paths.*#{encoded_path}\/models"
     
     def create_directories
-      @@directories = ["#{@@datum_drop_path}/fixtures", "#{@@datum_drop_path}/locals",
-      "#{@@datum_drop_path}/migrate", "#{@@datum_drop_path}/models"]
+      @@directories = ["#{@@datum_drop_path}/fixtures", 
+        "#{@@datum_drop_path}/locals", "#{@@datum_drop_path}/migrate", 
+        "#{@@datum_drop_path}/models"]
       
       @@directories.each { 
         |path| FileUtils.mkdir_p(path) if !File::directory?(path)

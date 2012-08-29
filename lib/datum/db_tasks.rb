@@ -11,7 +11,8 @@ module Datum
     end
     
     def migrate
-      ActiveRecord::Base.establish_connection(Rails.env)
+      # Not 100% sure why other methods of connecting are failing... 
+      # Rake::Task['db:create'].invoke()
       ActiveRecord::Migrator.migrate "#{@@local_path}/migrate"
     end
     
