@@ -1,5 +1,5 @@
 module Datum
-  VERSION = "0.8.3"
+  VERSION = "0.8.4"
 end
 
 ## 0.8.1
@@ -9,3 +9,5 @@ end
 ## Fixed errors in verification / environment
 ## 0.8.3
 ## Added functionality in verification to handle existing datum files
+## 0.8.4
+## Fixed bug with leftover verification test case.

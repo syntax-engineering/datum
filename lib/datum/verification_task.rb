@@ -109,6 +109,12 @@ module Datum
       FileUtils.remove_dir "#{@@local_path}"
       FileUtils.cp_r "#{@@datum_tmp}", "#{@@local_path}"
       FileUtils.remove_dir "#{@@datum_tmp}"
+
+      files = [@@test_drop]
+      files.each { |file|
+        context.log "Removing file: #{file}"
+        FileUtils.remove_file file  
+      }
       
     end
 
