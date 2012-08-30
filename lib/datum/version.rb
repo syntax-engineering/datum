@@ -1,5 +1,5 @@
 module Datum
-  VERSION = "0.8.5"
+  VERSION = "0.8.6"
 end
 
 ## 0.8.1
@@ -14,3 +14,6 @@ end
 ## 0.8.5
 ## Fixed bug with pre-existing datum database (verification failed when
 ## pre-existing store exists)
+## 0.8.6
+## Fixed migration not observing schema version (regression)
+## Updated drop to use connection instead of rake task (unreliable)

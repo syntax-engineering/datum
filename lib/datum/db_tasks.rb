@@ -7,17 +7,21 @@ module Datum
     end
     
     def create
-      Rake::Task['db:create'].invoke()  
+      Rake::Task['db:create'].invoke()
     end
     
     def migrate
-      # Not 100% sure why other methods of connecting are failing... 
-      # Rake::Task['db:create'].invoke()
+      ActiveRecord::Base.establish_connection(Rails.env)
       ActiveRecord::Migrator.migrate "#{@@local_path}/migrate"
     end
     
     def drop
-      Rake::Task['db:drop'].invoke()
+      config   = Rails.configuration.database_configuration
+      database = config[Rails.env]["database"]
+
+      #Rake::Task['db:drop'].invoke()
+      ActiveRecord::Base.connection.drop_database database rescue nil
+      
     end
     
     # get into the datum fixtures directory, walk the yml, load into db
