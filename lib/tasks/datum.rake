@@ -25,6 +25,9 @@ namespace :datum do
     
     desc "Loads fixtures specific to datum database"
     task :load => :environment do invoke "load" end
+
+    desc "Prepares datum for use via create, migrate, load"
+    task :prepare => :environment do invoke "prepare" end
     
     #desc "Quick verification of basic datum functionality"
     #task :verify do invoke "verify" end

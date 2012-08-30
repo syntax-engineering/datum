@@ -6,6 +6,12 @@ module Datum
       Rails.env = @@datum_environment
     end
     
+    def prepare
+      create
+      migrate
+      load
+    end
+
     def create
       Rake::Task['db:create'].invoke()
     end
