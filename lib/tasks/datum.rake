@@ -23,6 +23,9 @@ namespace :datum do
     desc "Dump data as fixtures from datum database"
     task :dump => :environment do invoke "dump" end
     
+    desc "Loads datum fixtures IF table is empty"
+    task :load_when_empty => :environment do invoke "load_when_empty" end
+
     desc "Loads fixtures specific to datum database"
     task :load => :environment do invoke "load" end
 

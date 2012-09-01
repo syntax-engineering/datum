@@ -1,5 +1,5 @@
 module Datum
-  VERSION = "0.8.7"
+  VERSION = "0.9.0"
 end
 
 ## 0.8.1
@@ -19,3 +19,6 @@ end
 ## Updated drop to use connection instead of rake task (unreliable)
 ## 0.8.7
 ## Added db:prepare rake task
+## 0.9.0
+## prepare no longer uses load, instead it uses load_when_empty
+## attr_accessor added to datum_version model

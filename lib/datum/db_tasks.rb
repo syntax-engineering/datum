@@ -9,7 +9,7 @@ module Datum
     def prepare
       create
       migrate
-      load
+      load_when_empty
     end
 
     def create
@@ -27,22 +27,15 @@ module Datum
 
       #Rake::Task['db:drop'].invoke()
       ActiveRecord::Base.connection.drop_database database rescue nil
-      
     end
     
+    def load_when_empty
+      load_fixtures true
+    end
+
     # get into the datum fixtures directory, walk the yml, load into db
     def load
-      Dir.glob("#{@@local_path}/fixtures/*.yml").entries.each do |entry|
-        file_name = entry.to_s.split('/').last.to_s.split('.')[0]
-        target_model = file_name.classify.constantize
-        data_hash = YAML.load(File.read(entry))
-        data_hash.each_value {|value|
-          value.delete "id"
-          value.delete "created_at"
-          value.delete "updated_at"
-          target_model.create value
-        }
-      end
+      load_fixtures false
     end
     
     # get into datum db, get relevant tables, produce ymls (for sharing)
@@ -55,8 +48,7 @@ module Datum
       tables = (ActiveRecord::Base.connection.tables - skip_tables)
       tables.each do |table_name|
         i = "000"
-        File.open("#{@@local_path}/fixtures/#{table_name}.yml", 
-        'w') do |file|
+        File.open("#{@@local_path}/fixtures/#{table_name}.yml", 'w') do |file|
           data = ActiveRecord::Base.connection.select_all(sql % table_name)
           file.write data.inject({}) { |hash, record|
             hash["#{table_name}_#{i.succ!}"] = record
@@ -74,23 +66,40 @@ module Datum
         f1.puts "\n\n#\n# data dump for code access of table #{file_name}"
         f1.puts "#\nmodule #{tasked_model.to_s.pluralize}"
         f1.puts "def self.data\nd = ["
-          data.each_with_index {|e, i|
-            hash = e.attributes
-            hash.each_pair {|key, value|
-              new_value = value.to_s
-              hash[key] = new_value
-            }
-            f1.puts "#{hash.to_s},"
+        data.each_with_index {|e, i|
+          hash = e.attributes
+          hash.each_pair {|key, value|
+            new_value = value.to_s
+            hash[key] = new_value
           }
+          f1.puts "#{hash.to_s},"
+        }
         f1.puts "]\nend\nend"
       end
     end
 
     private
+
     @@local_path = "#{Rails.root}/test/lib/datum"
     
     @@datum_environment = "datum"
     
+    def load_fixtures skip_with_data
+      Dir.glob("#{@@local_path}/fixtures/*.yml").entries.each do |entry|
+        file_name = entry.to_s.split('/').last.to_s.split('.')[0]
+        target_model = file_name.classify.constantize
+        if(!skip_with_data || target_model.count == 0)
+          data_hash = YAML.load(File.read(entry))
+          data_hash.each_value {|value|
+            value.delete "id"
+            value.delete "created_at"
+            value.delete "updated_at"
+            target_model.create value
+          }
+        end
+      end
+    end
+
     def context
       return Datum::Context
     end
