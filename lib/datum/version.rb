@@ -1,5 +1,5 @@
 module Datum
-  VERSION = "0.9.0"
+  VERSION = "0.9.1"
 end
 
 ## 0.8.1
@@ -22,3 +22,11 @@ end
 ## 0.9.0
 ## prepare no longer uses load, instead it uses load_when_empty
 ## attr_accessor added to datum_version model
+## 0.9.1
+## TODO: add attr_accessor to generated models
+## TODO: look into hooking to the class used by selenium
+## TODO: look into round tripping from generated ruby files
+## TODO: run_once
+## TODO: run_id
+## TODO: helper for error_msgs
+## TODO: Test cases are still being executed in reverse order
