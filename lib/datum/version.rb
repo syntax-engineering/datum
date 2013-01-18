@@ -1,5 +1,5 @@
 module Datum
-  VERSION = "0.9.1"
+  VERSION = "0.9.2"
 end
 
 ## 0.8.1
@@ -26,3 +26,5 @@ end
 ## updated datum_migration template to include attr_accessible for all 
 ## attributes
 ## fixed datum verification to use attr_accessible
+## 0.9.2
+## tiny update to fix template for models
