@@ -1,5 +1,5 @@
 module Datum
-  VERSION = "0.9.0"
+  VERSION = "0.9.1"
 end
 
 ## 0.8.1
@@ -22,3 +22,7 @@ end
 ## 0.9.0
 ## prepare no longer uses load, instead it uses load_when_empty
 ## attr_accessor added to datum_version model
+## 0.9.1
+## updated datum_migration template to include attr_accessible for all 
+## attributes
+## fixed datum verification to use attr_accessible

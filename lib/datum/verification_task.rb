@@ -84,7 +84,8 @@ module Datum
         {:version => "0.8.5"},
         {:version => "0.8.6"},
         {:version => "0.8.7"},
-        {:version => "0.9.0"}])
+        {:version => "0.9.0"},
+        {:version => "0.9.1"}])
     end
 
     def exec_test

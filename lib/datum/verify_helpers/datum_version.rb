@@ -3,6 +3,6 @@
 class DatumVersion < ActiveRecord::Base
   establish_connection :datum
   
-  attr_accessor :datum_versions
+  attr_accessible :version
   
 end
