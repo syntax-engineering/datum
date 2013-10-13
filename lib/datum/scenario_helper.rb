@@ -3,6 +3,8 @@ module ScenarioHelper
 # When factory is used, instances are stored here
   @@factory_extensions = Hash.new
 
+  # given  => {:foo => "vfoo", :bar => "vbar"}, :foo
+  # return => "vfoo" -- {:bar => "vbar"}
   def read_delete hash, key
     return nil if !hash.key? key
     v = hash[key]
@@ -72,7 +74,8 @@ module ScenarioHelper
         ref_hash.each_pair {|second_key, second_value|
           inst[second_key] = second_value
         }
-        inst.save
+        f = inst.save
+        #raise "could not save instance" unless f
         inst = inst.class.find_by_id(inst.id)
       end
 

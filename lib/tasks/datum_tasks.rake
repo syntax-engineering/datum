@@ -1,7 +1,6 @@
 #namespace :datum do
 
-#  desc "Enable datum"
-#  task :install => :environment do
-    
+#  desc "A description goes here"
+#  task :a_task => :environment do
 #  end
 #end

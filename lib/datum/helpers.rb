@@ -34,9 +34,10 @@ class Helpers
     obj.instance_variable_set(cls_var_str.to_sym, instance)
     obj.class.send :define_method, method_symbol do
       val = eval("#{cls_var_str}")
-      return val unless val.to_i.to_s == val || val == ""
       return nil if val == ""
-      return val.to_i
+      return val unless val.is_a? String
+      return val.to_i if val.to_i.to_s == val
+      return val
     end
   end
   

@@ -3,12 +3,7 @@ require 'datum/helpers'
 module Datum
 class TestCase < ActiveSupport::TestCase
 
-  @@test_data = {}
-  @datum = nil
-
-  def datum
-    return @datum
-  end
+  attr_reader :test_case, :datum; @@test_data = {}
 
   def initialize(test_case)
     @test_case = test_case
@@ -22,7 +17,7 @@ class TestCase < ActiveSupport::TestCase
     @@test_data[method_name] = rows
   end
 
-  def self.options_for method_name, options
+  def self.options_for method_name, options # options == row or rows
     rows = Helpers.direct_access options
     unless rows.nil?
       @@test_data[method_name] = rows
