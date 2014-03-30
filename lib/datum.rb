@@ -10,6 +10,7 @@ require 'datum/scenario_helper'
 module Datum
   autoload :ScenarioHelper, 'datum/scenario_helper'
   autoload :TestCase, 'datum/test_case'
+  autoload :CtrlrTestCase, 'datum/ctrlr_test_case'
 end
 
 class ActiveSupport::TestCase
