@@ -1,7 +1,8 @@
 module Datum
-  VERSION = "0.9.3"
+  VERSION = "0.9.4"
 end
 
+## 0.9.4 ## finishing edge... supporting model, controller & integration tsts
 ## 0.9.3 ## big update to Rails 4 and changing of the core structure
 ## 0.9.2 ## tiny update to fix template for models
 ## 0.9.1 ## updated datum_migration template to include attr_accessible for all 

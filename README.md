@@ -5,6 +5,7 @@
 Datum is a simple take on Data Driven Testing for Rails. Datum:
 
 * Enables data-driven test cases
+* Adds a simple scenario mechanism to test data
 
 ## Rails 4
 
@@ -37,7 +38,7 @@ Tyemill is a technology company in Seattle, Washington. We make a few line-of-bu
 ## License
 (The MIT License)
 
-Copyright 2013 Tyemill. http://tyemill.com
+Copyright 2013,2014 Tyemill. http://tyemill.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
