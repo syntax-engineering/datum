@@ -41,7 +41,8 @@ module ScenarioHelper
       ref_clone = read_delete(ref_hash, "_clone")
 
       unless ref_scope.nil?
-        Thread.current[:account_id] = ref_scope.to_i
+        ref_scope = self.send(ref_scope)
+        Thread.current[:account_id] = ref_scope
         raise "#{ref_scope}"
       end
 
