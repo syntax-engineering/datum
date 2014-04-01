@@ -25,6 +25,7 @@ module ScenarioHelper
   # _import: "scenario_file" <- a scenario to load in addition to current
   #
   # TODO: Full documentation
+  # TODO: Reduce overall complexity - seperate into smaller methods - old old
   def process_scenario scenario
     #raise "#{Dir.pwd}/test/scenarios/#{scenario}.yml"
     scenario_hash = YAML.load(
@@ -69,9 +70,6 @@ module ScenarioHelper
         process_scenario ref_label
       elsif !ref_scope.nil?
         ref_scope = self.send(ref_scope)
-        puts "label: #{ref_label.to_s}"
-        ref_label = ref_label.to_s
-        puts "label: #{ref_label.to_s}"
         Thread.current[ref_label.to_sym] = ref_scope.id
       else
         new_instance =
