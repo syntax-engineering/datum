@@ -40,10 +40,10 @@ module ScenarioHelper
       ref_import = read_delete(ref_hash, "_import")
       ref_clone = read_delete(ref_hash, "_clone")
 
-      unless ref_scope.nil?
-        ref_scope = self.send(ref_scope)
-        Thread.current[:account_id] = ref_scope.id
-      end
+      #unless ref_scope.nil?
+      #  ref_scope = self.send(ref_scope)
+      #  Thread.current[:account_id] = ref_scope.id
+      #end
 
       if 0 != ref_hash.count
         ref_hash.each_pair {|second_key, second_value|
@@ -67,12 +67,13 @@ module ScenarioHelper
       elsif !ref_import.nil?
         # todo support comma seperated import
         process_scenario ref_label
+      elsif !ref_scope.nil?
+        ref_scope = self.send(ref_scope)
+        Thread.current[ref_label.to_sym] = ref_scope.id
       else
         new_instance =
             eval("#{ref_model.to_s.tableize.downcase}(:#{ref_label})")
       end
-
-      
 
 
       if !new_instance.nil?
@@ -88,9 +89,9 @@ module ScenarioHelper
         inst = inst.class.find_by_id(inst.id)
       end
 
-      unless ref_scope.nil?
-        Thread.current[:account_id] = nil
-      end
+      #unless ref_scope.nil?
+      #  Thread.current[:account_id] = nil
+      #end
 
     }
 
