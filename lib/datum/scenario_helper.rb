@@ -42,7 +42,7 @@ module ScenarioHelper
 
       unless ref_scope.nil?
         Thread.current[:account_id] = ref_scope.to_i
-        raise "#{ref_scope.to_i}"
+        raise "#{ref_scope}"
       end
 
       if 0 != ref_hash.count
