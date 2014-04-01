@@ -69,24 +69,28 @@ module ScenarioHelper
         process_scenario ref_label
       elsif !ref_scope.nil?
         ref_scope = self.send(ref_scope)
-        Thread.current[ref_label.to_s] = ref_scope.id
+        puts "label: #{ref_label.to_s}"
+        ref_label = ref_label.to_s
+        puts "label: #{ref_label.to_s}"
+        Thread.current[ref_label.to_sym] = ref_scope.id
       else
         new_instance =
             eval("#{ref_model.to_s.tableize.downcase}(:#{ref_label})")
       end
 
-
-      if !new_instance.nil?
-        addExtension ref_label, new_instance unless ref_label.nil? || 
-        !ref_import.nil?
-      elsif !ref_label.nil? and ref_import.nil?
-        inst = self.send(ref_label)
-        ref_hash.each_pair {|second_key, second_value|
-          inst[second_key] = second_value
-        }
-        f = inst.save
-        #raise "could not save instance" unless f
-        inst = inst.class.find_by_id(inst.id)
+      if ref_scope.nil?
+        if !new_instance.nil?
+          addExtension ref_label, new_instance unless ref_label.nil? || 
+          !ref_import.nil?
+        elsif !ref_label.nil? and ref_import.nil?
+          inst = self.send(ref_label)
+          ref_hash.each_pair {|second_key, second_value|
+            inst[second_key] = second_value
+          }
+          f = inst.save
+          #raise "could not save instance" unless f
+          inst = inst.class.find_by_id(inst.id)
+        end
       end
 
       #unless ref_scope.nil?
