@@ -69,10 +69,7 @@ module ScenarioHelper
         process_scenario ref_label
       elsif !ref_scope.nil?
         ref_scope = self.send(ref_scope)
-        puts "#{ref_label}"
-        puts "#{ref_label.to_sym}"
-        puts "#{ref_scope}"
-        Thread.current[ref_label.to_sym] = ref_scope.id
+        Thread.current[ref_label] = ref_scope.id
       else
         new_instance =
             eval("#{ref_model.to_s.tableize.downcase}(:#{ref_label})")
