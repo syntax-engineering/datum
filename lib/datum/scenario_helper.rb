@@ -36,7 +36,7 @@ module ScenarioHelper
 
       ref_model = read_delete(ref_hash, "_model")
       ref_model = ref_model.constantize unless ref_model.nil?
-
+      ref_scope = read_delete(ref_hash, "_scope")
       ref_import = read_delete(ref_hash, "_import")
       ref_clone = read_delete(ref_hash, "_clone")
       if 0 != ref_hash.count
@@ -66,6 +66,11 @@ module ScenarioHelper
             eval("#{ref_model.to_s.tableize.downcase}(:#{ref_label})")
       end
 
+      unless ref_scope.nil?
+        Thread.current[:account_id] = ref_scope.to_i
+      end
+
+
       if !new_instance.nil?
         addExtension ref_label, new_instance unless ref_label.nil? || 
         !ref_import.nil?
@@ -77,6 +82,10 @@ module ScenarioHelper
         f = inst.save
         #raise "could not save instance" unless f
         inst = inst.class.find_by_id(inst.id)
+      end
+
+      unless ref_scope.nil?
+        Thread.current[:account_id] = nil
       end
 
     }
