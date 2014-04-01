@@ -43,7 +43,6 @@ module ScenarioHelper
       unless ref_scope.nil?
         ref_scope = self.send(ref_scope)
         Thread.current[:account_id] = ref_scope.id
-        raise "#{ref_scope.id}"
       end
 
       if 0 != ref_hash.count
