@@ -1,5 +1,8 @@
 ##### Datum is currently under development and pre-1.0
 
+## Latest
+We're close to a refresh, most of Datum has been re-written. Hope, hope, hope!
+
 ## Datum
 
 Datum is a simple take on Data Driven Testing for Rails. Datum:
@@ -12,7 +15,7 @@ Datum is a simple take on Data Driven Testing for Rails. Datum:
 
 ## Rails 3
 
-Datum is still in development. Currently, we're working with Rails 3.2.6 and Ruby 1.9.3. 
+Datum is still in development. Currently, we're working with Rails 3.2.6 and Ruby 1.9.3.
 
 For now, our target test framework is <b>Test::Unit</b>.
 
@@ -38,11 +41,11 @@ rake datum:enable
 
 Enable will create several directories in your test directory. It will also prompt you to ask for permission to update your database.yml and application.rb. You MUST review both files even if you have Enable update them for you.
 
-Additionally, Enable will further prompt you for permission to verify all core Datum functionality. Verification will include all basic Datum rake tasks along with execution of tests that use Datum's drive_with. 
+Additionally, Enable will further prompt you for permission to verify all core Datum functionality. Verification will include all basic Datum rake tasks along with execution of tests that use Datum's drive_with.
 
 <span style="color: red;">WARNING:</span> Enable's verification <b>WILL DROP the Datum Database</b>. If you are re-installing Datum, be sure to back-up your Datum store BEFORE running Enable.
 
-When finished, you are ready to create a Datum specific database and add migrations and models. 
+When finished, you are ready to create a Datum specific database and add migrations and models.
 
 ### Creating a Datum Specific Database and Tables
 
@@ -91,10 +94,10 @@ Will output:
 ```console
   starting test case...
   1
-  
+
   starting test case...
   2
-  
+
   starting test case...
   3
 ```
@@ -112,7 +115,7 @@ To get Datum data from fixtures into the Datum specific database:
 rake datum:db:load
 ```
 
-To convert a Datum table into a file so that drive_with does <b>not</b> use the table (and is thus <b>not</b> dependent on a Datum database / settings / etc) 
+To convert a Datum table into a file so that drive_with does <b>not</b> use the table (and is thus <b>not</b> dependent on a Datum database / settings / etc)
 
 ```console
 rake datum:db:localize[table_items]
