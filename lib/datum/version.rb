@@ -1,5 +1,5 @@
 module Datum
-  VERSION = "2014.0.01"
+  VERSION = "2014.0.02"
 end
 
 
