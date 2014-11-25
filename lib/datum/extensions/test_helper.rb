@@ -1,10 +1,12 @@
 require "datum/datum"
 require "datum/scenario"
+require "datum/file_parser"
+require "datum/utilities"
 
 module Datum
 module Extensions
 module TestHelper
-  attr_reader :datum
+  #attr_reader :datum
 
   def process_scenario scenario_name
     s = Scenario.new(scenario_name, self)
@@ -30,11 +32,9 @@ private
       return instance
     end
   end
-
 end
 end
 end
-
 
 # Added to enable a global method per label
 def construct_datum label, hash
@@ -65,70 +65,40 @@ def addDatumAttribute(ext, instance, obj)
   end
 end
 
-## Global namespace extension (for testcase reference pre-load)
-def xxx datum_to_load, &block
-    #puts "Datum::TestHelperExtension.xxx :: #{datum_to_load}"
 
 
-    ## First difference:  The 'name' of the scenario is passed with method
-    ##                    need to parse
+# Utilities.construct_datum(label, attribute_hash)
+def datum_test data_filename, &block
+  data_filename.gsub! " ", "_"
+  sections = Datum::FileParser.parse_data data_filename
+  send(:define_method, data_filename.to_sym, &block)
+  i = 1
+  sections.each_pair { |key, value|
+    tst = "test_#{data_filename}_#{i}"
+    value.attributes["id"] = i
+    value.attributes["datum_label"] = key
+    value.attributes["datum_iterations"] = sections.length
+    send :define_method, tst.to_sym do
+      @datum = build_datum value.attributes
+      send data_filename
+    end
 
-    datum_to_load.gsub! " ", "_"
-
-    datum = Datum::Datum.new(datum_to_load)
-    datum.parse
-
-    send(:define_method, datum_to_load.to_sym, &block) #add the block to the test
-    i = 1
-    datum.elements.each_pair { |key, value|
-      tst = "test_#{datum_to_load}_#{i}"
-      value.attributes["id"] = i
-      value.attributes["datum_label"] = key
-      value.attributes["datum_iterations"] = datum.elements.length
-      send :define_method, tst.to_sym do
-        @datum = build_datum value.attributes
-        send datum_to_load
-      end
-
-
-      #Object.send(:define_method, key.to_s) do
-      #  puts "@@@@@!!!!!!!!!!!!!!!!@@@@@"
-      #end
-      i += 1
-    }
-
-
-
+    i += 1
+  }
 end
+
+
+## Global namespace extension (for testcase reference pre-load)
+
 
 ##############################################################################
 ##############################################################################
 
 ## Global namespace extension (for ERB usage)
 def import_scenario scenario ## added to the global namespace for file acecess
-  #puts "import_scenario :: #{scenario}"
   return Datum::Scenario.read Datum::Scenario.new(scenario, nil).absolute_path
 end
 
 def import_datum datum ## added to the global namespace for file acecess
-  #puts "import_scenario :: #{scenario}"
   return Datum::Datum.read Datum::Datum.new(datum).absolute_path
 end
-
-##############################################################################
-##############################################################################
-##############################################################################
-
-## Removed because (at this time) I feel the project developer should decide
-## where and when Datum gets loaded (for example, we use Devise - I'd want)
-## my loaded stuff to have access to those helpers.
-##
-## @TODO: Revist how / where to include TestHelperExtension
-
-#class ActiveSupport::TestCase
-#  include Datum::TestHelperExtension
-#end
-
-#class ActionController::TestCase
-#  include Datum::TestHelperExtension
-#end

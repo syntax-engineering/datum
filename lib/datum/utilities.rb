@@ -7,6 +7,5 @@ module Utilities
     hash.delete("id"); hash.delete("created_at"); hash.delete("updated_at")
     return hash
   end
-
 end
 end

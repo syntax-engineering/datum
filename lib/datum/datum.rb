@@ -11,10 +11,10 @@ require "datum/artifact"
 
 module Datum
 class Datum
-  attr_reader :basename, :elements #, :qualified_file_name
+  attr_reader :basename, :elements
 
-  DATUM_DIRECTORY = "DATUM_DIRECTORY"; #SCENARIO_ROOT_KEY = "DATUM_SCENARIO_ROOT"
-  DATUM_EXTENSION = ".datum"; #SCENARIO_EXTENSION = ".scenario"
+  DATUM_DIRECTORY = "DATUM_DIRECTORY"
+  DATUM_EXTENSION = ".datum"
 
   def initialize basename
     @basename = basename
