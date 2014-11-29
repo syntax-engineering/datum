@@ -1,7 +1,9 @@
 require "datum/datum"
 require "datum/scenario"
 require "datum/file_parser"
-require "datum/utilities"
+require "datum/structures"
+require "datum/file_info"
+#require "datum/utilities"
 
 module Datum
 module Extensions
@@ -69,6 +71,7 @@ end
 
 # Utilities.construct_datum(label, attribute_hash)
 def datum_test data_filename, &block
+
   data_filename.gsub! " ", "_"
   sections = Datum::FileParser.parse_data data_filename
   send(:define_method, data_filename.to_sym, &block)
@@ -100,5 +103,5 @@ def import_scenario scenario ## added to the global namespace for file acecess
 end
 
 def import_datum datum ## added to the global namespace for file acecess
-  return Datum::Datum.read Datum::Datum.new(datum).absolute_path
+  return File.read(FileInfo.new(datum, false).absolute_path)
 end

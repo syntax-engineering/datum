@@ -13,7 +13,9 @@ module Datum
   autoload :Datum, 'datum/extensions/test_helper'
 end
 
+require "datum/constants"
 require "datum/extensions/test_helper"
+
 
 # Enables ActiveSupport::TestCase and all extensions
 class ActiveSupport::TestCase

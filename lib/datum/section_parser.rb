@@ -4,9 +4,6 @@ require "datum/structures"
 module Datum
 module SectionParser
 
-  DATA_KEYWORDS = ["_clone"];
-  SCENARIO_KEYWORDS = ["_model"] + DATA_KEYWORDS;
-
   def self.parse_data_section label, attribute_hash
     hash, keywords = enumerate_attributes label, attribute_hash, DATA_KEYWORDS
     Structures::Section.new(label, hash, keywords)
