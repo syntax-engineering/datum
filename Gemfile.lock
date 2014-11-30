@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    datum (2014.0.01)
+    datum (4.0.0)
       rails (~> 4.1.7)
 
 GEM

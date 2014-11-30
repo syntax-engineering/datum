@@ -2,17 +2,17 @@
 require "datum/structures"
 
 module Datum
-module SectionParser
+module SectionHelper
 
-  def self.parse_data_section label, attribute_hash
-    hash, keywords = enumerate_attributes label, attribute_hash, DATA_KEYWORDS
+  def self.parse label, attribute_hash, keyword_list
+    hash, keywords = enumerate_attributes label, attribute_hash, keyword_list
     Structures::Section.new(label, hash, keywords)
   end
 
-  def self.parse_scenario_section
-  end
-
-private
+  #def self.parse_scenario_section label, attribute_hash
+  #  hash, keywords = enumerate_attributes label, attribute_hash, SCENARIO_KEYWORDS
+  #  Structures::Section.new(label, hash, keywords)
+  #end
   def self.enumerate_attributes label, attribute_hash, keyword_list
     keywords = nil
     attribute_hash.each_pair {|key, value|
@@ -36,8 +36,8 @@ private
     [attribute_hash, section_keywords]
   end
 
-  def self.resolve_keyword key, keywords
-    if key.starts_with? "_"
+  def self.resolve_keyword possible_keyword, keywords
+    if possible_keyword.starts_with? "_"
       keywords.each do |keyword|
         return keyword if keyword == possible_keyword
       end
