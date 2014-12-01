@@ -5,9 +5,7 @@ module Datum
 module DatumHelper
 
 
-  def self.build_testcases data_filename, tstcase, &block
-    data_filename.gsub! " ", "_"
-    sections = FileHelper.parse data_filename
+  def self.build_testcases data_filename, tstcase, sections, &block
     tstcase.send(:define_method, data_filename.to_sym, &block)
     #send(:define_method, data_filename.to_sym, &block)
     i = 1

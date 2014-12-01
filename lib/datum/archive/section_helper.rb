@@ -9,10 +9,6 @@ module SectionHelper
     Structures::Section.new(label, hash, keywords)
   end
 
-  #def self.parse_scenario_section label, attribute_hash
-  #  hash, keywords = enumerate_attributes label, attribute_hash, SCENARIO_KEYWORDS
-  #  Structures::Section.new(label, hash, keywords)
-  #end
   def self.enumerate_attributes label, attribute_hash, keyword_list
     keywords = nil
     attribute_hash.each_pair {|key, value|
@@ -20,8 +16,8 @@ module SectionHelper
       if keyword.nil?
         attribute_hash[key] = evaluate_value value
       else
-        attribute_hash, keywords =
-        handle_keyword(keywords, attribute_hash, keyword, value)
+        attribute_hash, keywords = handle_keyword(keywords,
+          attribute_hash, keyword, value)
       end
     }
     [attribute_hash, keywords]
