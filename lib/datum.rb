@@ -5,54 +5,22 @@
 # License:: MIT License (http://www.opensource.org/licenses/mit-license.php)
 
 require 'datum/railtie'
-require "datum/constants"
+#require "datum/constants"
+require "datum/data_container"
 
 class ActiveSupport::TestCase
   def process_scenario scenario_name
-    scenario_name = scenario_name.to_s
-    dir = Rails.root.join('test', 'datum', 'scenarios')
-    rd = File.read("#{dir}#{File::Separator}#{scenario_name}.rb")
-    eval rd
+    __datum_scenario_handler scenario_name
+  end
+  def import_scenario scenario_name
+    __datum_scenario_handler scenario_name
+  end
+private
+  def __datum_scenario_handler scenario_name
+    eval Datum.__datum_read_scenario(scenario_name.to_s)
   end
 end
-
-#def define_datum *datum_array
-
-#end
 
 def data_test data_filename, &block
-  Datum::DataContainer.new(data_filename.to_s).evaluate &block
-end
-
-def import_scenario filename
-end
-
-def import_data filename
-end
-
-module Datum
-  class DataContainer
-    attr_reader :filename
-
-    def initialize filename
-      @filename = filename
-    end
-
-    def directory
-      @directory ||= Rails.root.join('test', 'datum', 'data')
-    end
-
-    def absolute_path
-      @absolute_path ||= "#{directory}#{File::Separator}#{filename}.data"
-    end
-
-    def define_datum *datum_array
-      datum_hash = datum_array[0]
-    end
-
-    def evaluate &block
-      ruby = File.read(absolute_path)
-      eval ruby
-    end
-  end
+  Datum::DataContainer.new(data_filename.to_s, self).evaluate &block
 end
