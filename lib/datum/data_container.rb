@@ -1,4 +1,14 @@
 module Datum
+
+def self.directory
+  @@datum_data_dir ||=
+  Rails.root.join('test', 'datum', 'data').to_s + File::Separator
+end
+
+def self.read file
+  File.read("#{directory}#{file}.rb")
+end
+
 class DataContainer
   attr_reader :filename, :testcase
 
@@ -10,7 +20,7 @@ class DataContainer
   def data; @data.length == 0 ? nil : @data; end
 
   def evaluate &block
-    eval Datum.read_data(filename)
+    eval Datum.read(filename)
     @imports = nil
     return if data.nil?
     testcase.send(:define_method, filename.to_sym, &block)
@@ -36,11 +46,11 @@ private
   end
 
   #nodoc
-  def data_import filename
-    ap = "#{Datum.data_directory}#{filename}.rb"
+  def import_data filename
+    ap = "#{Datum.directory}#{filename}.rb"
     unless @imports.include? ap
       @imports.push ap
-      eval Datum.read_data filename
+      eval Datum.read filename
     end
   end
 
