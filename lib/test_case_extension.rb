@@ -3,13 +3,13 @@
 # Author:: Tyemill
 # Copyright:: Copyright (c) 2012 - 2014 Tyemill
 # License:: MIT License (http://www.opensource.org/licenses/mit-license.php)
-
-require 'datum/railtie'
-require "datum/data/core"
-require "datum/data/structures"
-require "datum/global"
-
-require "scenario/core"
+#
+# Extension for ActiveSupport::TestCase
 
 
-require "test_case_extension"
+class ActiveSupport::TestCase
+  def process_scenario scenario_name
+    Scenario.import scenario_name, binding
+  end
+end
+

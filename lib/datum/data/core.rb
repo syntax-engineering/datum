@@ -3,13 +3,14 @@
 # Author:: Tyemill
 # Copyright:: Copyright (c) 2012 - 2014 Tyemill
 # License:: MIT License (http://www.opensource.org/licenses/mit-license.php)
+#
+# core Datum::Data API
 
-require 'datum/railtie'
-require "datum/data/core"
-require "datum/data/structures"
-require "datum/global"
-
-require "scenario/core"
+module Datum
+module Data
 
 
-require "test_case_extension"
+
+
+end
+end
