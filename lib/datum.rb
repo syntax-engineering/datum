@@ -9,6 +9,7 @@ require "datum/structures"
 require "scenario"
 
 module Datum
+
   def self.directory
     Rails.root.join('test', 'datum', 'data').to_s + File::Separator
   end
@@ -16,15 +17,14 @@ module Datum
   def self.read file
     File.read("#{directory}#{file}.rb")
   end
+
+
+  DatumInfo = Struct.new(:tst, :name, :list)
+
 end
+
 
 
 def data_test data_filename, &block
-
-  eval Datum.read data_filename
+  #Datum.process data_filename, &block, klass
 end
-
-class ActiveSupport::TestCase
-
-end
-
