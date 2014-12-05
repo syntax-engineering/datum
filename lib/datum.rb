@@ -37,8 +37,7 @@ module Datum
 
     def add_structure struct
       @counter += 1; nm = DataManager.test_name(@filename, @counter)
-      k = DataManager.datum_key(@testcase, nm);
-      Datum.add_datum k, struct
+      k = DataManager.datum_key(@testcase, nm); Datum.add_datum(k, struct)
       @testcase.class_eval do
         define_method nm do
           full_key = DataManager.datum_key(self.class.to_s, __method__)
