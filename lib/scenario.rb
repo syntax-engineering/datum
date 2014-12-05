@@ -7,7 +7,6 @@ end
 
 module Scenario
   def self.directory
-    @@datum_scenario_dir ||=
     Rails.root.join('test', 'datum', 'scenarios').to_s + File::Separator
   end
   def self.read file
