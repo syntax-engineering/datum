@@ -13,10 +13,18 @@ class DataLoader
   end
 
   def add_structure datum_structure
-    @counter += 1
-    test_name = Datum.data_test_name @file_name, @counter
-    datum_key = Datum.datum_key @test_instance, test_name
+    test_name, datum_key = prep_for_new_structure
     Datum.loaded_data[datum_key] = datum_structure
+    add_test_case test_name
+    @file_name
+  end
+private
+  def prep_for_new_structure
+    @counter += 1
+    test_name = Datum.data_test_name(@file_name, @counter)
+    [test_name, Datum.datum_key(@test_instance, test_name)]
+  end
+  def add_test_case test_name
     @test_instance.class_eval do
       define_method test_name do
         datum_key = Datum.datum_key(self.class.to_s, __method__)
@@ -24,7 +32,6 @@ class DataLoader
         self.send @datum.data_method
       end
     end
-    @file_name
   end
 end
 end
