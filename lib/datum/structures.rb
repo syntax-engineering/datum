@@ -1,7 +1,11 @@
 require "plan9/structures"
 
 module Datum
-module Data
+
+DatumDirectories = Plan9::ImmutableStruct.new(:root) do
+  def data; root.join('data'); end; def scenario; root.join('scenarios'); end
+end
+
 class DatumStruct < Plan9::ImprovedStruct
 
   def self.new(*attrs, &block)
@@ -22,12 +26,11 @@ private
       alias_method :improved_initialize, :initialize
 
       def initialize(*attrs)
-        attrs.push($datum_data_manager.add_structure(self))
+        attrs.push($datum_data_loader.add_structure(self))
         improved_initialize(*attrs)
       end
     end
   end
 
-end
 end
 end
