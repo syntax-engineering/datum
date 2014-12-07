@@ -20,12 +20,15 @@ private
       alias_method :struct_initialize, :initialize
 
       def initialize(*attrs)
-        if members.size > 1 && attrs && attrs.size == 1 &&
-          attrs.first.instance_of?(Hash)
+        if is_hash_case? *attrs
           struct_initialize(*members.map { |m| attrs.first[m.to_sym] })
         else
           struct_initialize(*attrs)
         end
+      end
+
+      def is_hash_case?(*a)
+        members.size > 1 && a && a.size == 1 && a.first.instance_of?(Hash)
       end
     end
   end

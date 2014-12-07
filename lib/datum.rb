@@ -1,34 +1,7 @@
 
 require "datum/internal"
 require "datum/data_loader"
-
-
-class DatumStruct < Plan9::ImprovedStruct
-
-  def self.new(*attrs, &block)
-    attrs.push(:data_method)
-    super(*attrs, &block)
-  end
-
-protected
-  def self.init_new(struct)
-    super(struct)
-    datumize_constructor!(struct)
-    struct
-  end
-
-private
-  def self.datumize_constructor! struct
-    struct.class_eval do
-      alias_method :improved_initialize, :initialize
-
-      def initialize(*attrs)
-        attrs.push($datum_data_loader.add_structure(self))
-        improved_initialize(*attrs)
-      end
-    end
-  end
-end
+require "datum/datum_struct"
 
 class ActiveSupport::TestCase
   def process_scenario scenario_name
