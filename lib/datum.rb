@@ -1,6 +1,16 @@
 
-require "datum/internal"
 require "datum/datum_struct"
+require "datum/utils"
+
+module Datum
+  @@loaded_data = nil
+
+  def self.loaded_data
+    @@loaded_data ||= {}
+  end
+end
+
+include Datum
 
 class ActiveSupport::TestCase
   def process_scenario scenario_name
@@ -9,17 +19,16 @@ class ActiveSupport::TestCase
 end
 
 def __import scenario_name
-  Datum.scenario_import(scenario_name, binding)
+  Utils.import_file(scenario_name, Utils.directories.scenario, binding)
 end
 
 def __clone resource, override_hash = nil
-  Datum.scenario_clone_resource resource, override_hash
+  Utils.scenario_clone_resource resource, override_hash
 end
 
 def data_test name, &block
-  $datum_test_case = self
-  build = @datum_data_method.nil? ? true : false
+  DatumStruct.test_case = self
   @datum_data_method = name
-  Datum.add_methods(build, self, name, &block)
-  eval Datum.read_file(name, Datum.directories.data)
+  self.send(:define_method, name, &block)
+  Utils.import_file(name, Utils.directories.data, binding)
 end

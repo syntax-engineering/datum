@@ -1,5 +1,11 @@
+require "plan9/structures"
+
 module Datum
-class DatumStruct < Plan9::ImprovedStruct
+class DatumStruct < Plan9::ImmutableStruct
+  @@test_case = nil
+  def self.test_case= testcase; @@test_case = testcase; end
+  def self.test_case; return @@test_case; end
+
 protected
   def self.init_new(struct)
     super(struct)
@@ -14,9 +20,8 @@ private
       attr_reader :datum_id, :datum_data_method, :datum_test_method
 
       def initialize(*attrs)
-        #@data_loader = $datum_data_loader
         @datum_data_method, @datum_id, @datum_test_method =
-        Datum.add_datum_structure(self)
+        Utils.add_datum_structure(self)
         improved_initialize(*attrs)
       end
 
