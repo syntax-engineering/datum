@@ -5,11 +5,6 @@ module Datum
 module Utils
   @@dirs = nil
 
-  #method_cases = Datum.resolve_loaded_data(Datum.datum_key(tc, data_method))
-  #def self.resolve_loaded_data key
-  #  d = loaded_data[key]; d.nil? ? loaded_data[key] = [] : d
-  #end
-
   DatumDirectories = Plan9::ImmutableStruct.new(:root) do
     def data; root.join('data'); end; def scenario; root.join('scenarios'); end
   end
