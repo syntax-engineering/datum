@@ -1,5 +1,6 @@
 
 require "datum/internal"
+require "datum/data_loader"
 require "datum/datum_struct"
 
 class ActiveSupport::TestCase
@@ -17,9 +18,5 @@ def __clone resource, override_hash = nil
 end
 
 def data_test name, &block
-  $datum_test_case = self
-  build = @datum_data_method.nil? ? true : false
-  @datum_data_method = name
-  Datum.add_methods(build, self, name, &block)
-  eval Datum.read_file(name, Datum.directories.data)
+  ($datum_data_loader = Datum::DataLoader.new(self, name)).load(&block)
 end
