@@ -28,39 +28,26 @@ module Utils
         override_hash.with_indifferent_access).with_indifferent_access
   end
 
-  def self.data_test_name data_name, counter
-    "test_#{data_name}_#{counter}"
+  def self.test_to_data_method_with_index(test_name)
+    [test_name.slice(/(?<=_).*(?=_)/), ((test_name.to_s.split('_')[-1]).to_i)]
   end
 
-  def self.datum_key test_instance, data_test_name
-    "#{test_instance}_#{data_test_name}"
+  #def self.data_test_name data_name, counter
+  #  "test_#{data_name}_#{counter}"
+  #end
+
+  def self.add_datum_test_case datum_structure
+    puts "add called"
+    return
+    # datum_test_name = data_test_name DatumStruct.data_method, datum_structure.test_case_count
+    # DatumStruct.test_case.instance_variable_set(:"@#{datum_test_name}", datum_structure)
+    # DatumStruct.test_case.class_eval do
+    #   define_method datum_test_name do
+    #     @datum = DatumStruct.test_case.instance_variable_get(:"@#{__method__.to_s}")
+    #     self.send(@datum.datum_data_method)
+    #   end
+    # end
   end
 
-  def self.test_to_data_method_with_index test_name
-    [test_name.slice(/(?<=_).*(?=_)/),
-     ((test_name.to_s.split('_')[-1]).to_i) - 1]
-  end
-
-  def self.add_datum_structure datum_structure
-    tc = DatumStruct.test_case
-    data_method = tc.instance_variable_get('@datum_data_method')
-    d = Datum.loaded_data[key = datum_key(tc, data_method)]
-    method_cases = d.nil? ? Datum.loaded_data[key] = [] : d
-    method_cases.push(datum_structure)
-    [data_method, method_cases.length, add_datum_test(tc,
-      data_test_name(data_method, method_cases.length))]
-  end
-
-  def self.add_datum_test test_case, test_name
-    test_case.class_eval do
-      define_method test_name do
-        data_name, index = Utils.test_to_data_method_with_index(method_name)
-        @datum = Datum.loaded_data[Utils.datum_key(self.class.to_s,
-            data_name)][index]
-        self.send(@datum.datum_data_method)
-      end
-    end
-    test_name
-  end
 end
 end
