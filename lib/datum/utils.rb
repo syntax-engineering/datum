@@ -32,21 +32,12 @@ module Utils
     [test_name.slice(/(?<=_).*(?=_)/), ((test_name.to_s.split('_')[-1]).to_i)]
   end
 
-  #def self.data_test_name data_name, counter
-  #  "test_#{data_name}_#{counter}"
-  #end
+  def self.data_test_method data_method_name, counter
+      "test_#{data_method_name}_#{counter}"
+  end
 
-  def self.add_datum_test_case datum_structure
-    puts "add called"
-    return
-    # datum_test_name = data_test_name DatumStruct.data_method, datum_structure.test_case_count
-    # DatumStruct.test_case.instance_variable_set(:"@#{datum_test_name}", datum_structure)
-    # DatumStruct.test_case.class_eval do
-    #   define_method datum_test_name do
-    #     @datum = DatumStruct.test_case.instance_variable_get(:"@#{__method__.to_s}")
-    #     self.send(@datum.datum_data_method)
-    #   end
-    # end
+  def self.datum_key test_instance, data_test_method
+    "#{test_instance}_#{data_test_method}"
   end
 
 end
