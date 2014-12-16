@@ -1,11 +1,7 @@
 
-require "datum/internal/core"
+require "datum_internal/core"
 require "datum/datum_struct"
-require "datum/utils"
-
-module Datum
-  def self.core; Datum::Internal::Core; end;
-end
+require "datum_internal/utilities"
 
 class ActiveSupport::TestCase
   def process_scenario scenario_name
@@ -22,9 +18,10 @@ def __clone resource, override_hash = nil
 end
 
 def data_test name, &block
-  Datum.core.instance_variable_set(:"@context",
-    Datum.core::DatumContext.new(name, self))
-  #self.send(:define_method, name, &block)
-  #self.class_eval(Utils.read_file(name, Utils.directories.data))
-  #Datum.instance_variable_set(:"@context", nil)
+  DatumInternal::Core.instance_variable_set(:"@context",
+    DatumInternal::Core::DataContext.new(name, self))
+  self.send(:define_method, name, &block)
+  self.class_eval(DatumInternal::Utilities.read_file(
+    name, DatumInternal::Utilities.directories.data))
+  DatumInternal::Core.instance_variable_set(:"@context", nil)
 end

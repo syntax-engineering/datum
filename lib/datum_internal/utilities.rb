@@ -1,8 +1,5 @@
-
-require "plan9/structures"
-
-module Datum
-module Utils
+module DatumInternal
+module Utilities
   @@dirs = nil
 
   DatumDirectories = Plan9::ImmutableStruct.new(:root) do
@@ -13,8 +10,8 @@ module Utils
     @@dirs ||= DatumDirectories.new(Rails.root.join('test', 'datum'))
   end
 
-  def self.read_file file, directory
-    File.read directory.join("#{file}.rb")
+  def self.read_file file, directory, ext = ".rb"
+    File.read directory.join("#{file}#{ext}")
   end
 
   def self.import_file name, directory, current_binding
@@ -39,6 +36,5 @@ module Utils
   def self.datum_key test_instance, data_test_method
     "#{test_instance}_#{data_test_method}"
   end
-
 end
 end
