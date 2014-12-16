@@ -28,19 +28,19 @@ private
       end
 
       def configure_datum_properties
-        context = Datum.context
+        context = DatumInternal.context
         @datum_data_file, dtm_id, @datum_test_method, key = context.add_test_case
         @datum_test_instance = datum_data_file.test_instance
         @datum_data_method = datum_data_file.data_method
-        Datum.loaded_data[key] = self
+        DatumInternal.loaded_data[key] = self
         add_test_case_method
         dtm_id
       end
 
       def add_test_case_method
         datum_test_instance.send(:define_method, datum_test_method) do
-          key = DataFile.datum_key(self.class.to_s, __method__)
-          @datum = Datum.loaded_data[key]
+          key = DatumInternal::Utilities.datum_key(self.class.to_s, __method__)
+          @datum = DatumInternal.loaded_data[key]
           @datum.datum_data_file.called_tests.push @datum.datum_id
           self.send(@datum.datum_data_method)
         end

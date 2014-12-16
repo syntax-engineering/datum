@@ -1,9 +1,7 @@
 module DatumInternal
-module Core
-  def self.context; @context; end;
-  class DataContext
+class DataContext
     def initialize(data_method, tst_instance)
-#      @data_file = DataFile.new(data_method, tst_instance)
+      @data_file = Datum::DataFile.new(data_method, tst_instance)
     end
 
     def add_test_case
@@ -13,12 +11,11 @@ module Core
     end
 
     def data_test_method
-      DataFile.data_test_method(@data_file.data_method, @data_file.test_count)
+      DatumInternal::Utilities.data_test_method(@data_file.data_method, @data_file.test_count)
     end
 
     def datum_key
-      DataFile.datum_key(@data_file.test_instance, data_test_method)
+      DatumInternal::Utilities.datum_key(@data_file.test_instance, data_test_method)
     end
-  end
 end
 end

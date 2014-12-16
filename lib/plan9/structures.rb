@@ -34,11 +34,11 @@ private
   end
 
   def self.extend_dup!(struct)
-  struct.class_eval do
-    def dup(overrides={})
-      self.class.new(to_h.merge(overrides))
+    struct.class_eval do
+      def dup(overrides={})
+        self.class.new(to_h.merge(overrides))
+      end
     end
-  end
   end
 end
 
