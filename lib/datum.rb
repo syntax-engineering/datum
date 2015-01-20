@@ -1,9 +1,10 @@
 
-require "datum_internal/utilities"
-require "datum_internal/internals"
-require "datum_internal/data_context"
+#require "datum_internal/utilities"
+#require "datum_internal/internals"
+#require "datum_internal/data_context"
 
 require "datum/datum_struct"
+require "datum/datum_directories"
 require "datum/data_file"
 require "datum/test_case_extension"
 require "datum/scenario_file_api"
@@ -16,7 +17,7 @@ module Datum
   def self.data_files; @@data_files ||= {}; end
 
   def self.directories
-    @@dirs ||= DatumDirectories.new(Rails.root.join('test', 'datum'))
+    @@dirs ||= Datum::DatumDirectories.new(Rails.root.join('test', 'datum'))
   end
 
   def self.test_to_data_method_with_index(test_name)
