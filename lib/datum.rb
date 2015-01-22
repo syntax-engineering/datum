@@ -1,8 +1,4 @@
 
-#require "datum_internal/utilities"
-#require "datum_internal/internals"
-#require "datum_internal/data_context"
-
 require "datum/datum_struct"
 require "datum/datum_directories"
 require "datum/data_file"
@@ -41,8 +37,8 @@ module Datum
 
   class << self
   private
-    def self.context; @context; end;
-    def self.loaded_data; @@loaded_data ||= {}; end
+    def context; @context; end;
+    def loaded_data; @@loaded_data ||= {}; end
 
     def read_file file, directory, ext = ".rb"
       File.read directory.join("#{file}#{ext}")
@@ -51,8 +47,6 @@ module Datum
     def import_file name, directory, current_binding
       eval(read_file(name, directory), current_binding)
     end
-
-
 
   end
 end

@@ -7,7 +7,7 @@ module Datum
       @test_instance = tst_instance;
       @test_count = 0;
       @called_tests = []
-      DatumInternal.data_files[data_method.to_sym] = self
+      Datum.data_files[data_method.to_sym] = self
     end
   end
 end

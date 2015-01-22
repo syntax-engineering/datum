@@ -1,4 +1,5 @@
 require "plan9/structures"
+require "datum_internal/data_context"
 
 module Datum
 class DatumStruct < Plan9::ImmutableStruct
@@ -28,19 +29,21 @@ private
       end
 
       def configure_datum_properties
-        context = DatumInternal.context
+        context = Datum.instance_variable_get(:"@context")
         @datum_data_file, dtm_id, @datum_test_method, key = context.add_test_case
         @datum_test_instance = datum_data_file.test_instance
         @datum_data_method = datum_data_file.data_method
-        DatumInternal.loaded_data[key] = self
+
+        loaded = Datum.send(:"loaded_data")
+        loaded[key] = self
         add_test_case_method
         dtm_id
       end
 
       def add_test_case_method
         datum_test_instance.send(:define_method, datum_test_method) do
-          key = DatumInternal::Utilities.datum_key(self.class.to_s, __method__)
-          @datum = DatumInternal.loaded_data[key]
+          key = Datum.datum_key(self.class.to_s, __method__)
+          @datum = Datum.send(:"loaded_data")[key]
           @datum.datum_data_file.called_tests.push @datum.datum_id
           self.send(@datum.datum_data_method)
         end

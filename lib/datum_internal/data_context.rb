@@ -11,11 +11,11 @@ class DataContext
     end
 
     def data_test_method
-      DatumInternal::Utilities.data_test_method(@data_file.data_method, @data_file.test_count)
+      Datum.data_test_method(@data_file.data_method, @data_file.test_count)
     end
 
     def datum_key
-      DatumInternal::Utilities.datum_key(@data_file.test_instance, data_test_method)
+      Datum.datum_key(@data_file.test_instance, data_test_method)
     end
 end
 end
