@@ -2,9 +2,11 @@
 require "datum/datum_struct"
 require "datum/datum_directories"
 require "datum/data_file"
-require "datum/test_case_extension"
-require "datum/scenario_file_api"
+#require "datum/test_case_extension"
+#require "datum/scenario_file_api"
 require "datum/data_test"
+
+require "scenario"
 
 module Datum
   @@data_files, @@loaded_data, @@dirs = nil
@@ -26,13 +28,6 @@ module Datum
 
   def self.datum_key test_instance, data_test_method
     "#{test_instance}_#{data_test_method}"
-  end
-
-  def self.scenario_clone_resource resource, override_hash = nil
-    override_hash.nil? ?
-      resource.dup.attributes.with_indifferent_access :
-      resource.dup.attributes.merge(
-        override_hash.with_indifferent_access).with_indifferent_access
   end
 
   class << self
