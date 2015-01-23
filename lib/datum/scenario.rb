@@ -22,9 +22,10 @@ end
 
 # clones the attributes of a resource, overriding as directed
 def __clone resource, override_hash = nil
-  Scenario.send :scenario_clone_resource, resource, override_hash
+  Datum::Scenario.send :scenario_clone_resource, resource, override_hash
 end
 
+module Datum
 module Scenario
   class << self
   private
@@ -35,4 +36,5 @@ module Scenario
           override_hash.with_indifferent_access).with_indifferent_access
     end
   end
+end
 end

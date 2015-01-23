@@ -6,7 +6,7 @@ require "datum/data_file"
 #require "datum/scenario_file_api"
 require "datum/data_test"
 
-require "scenario"
+require "datum/scenario"
 
 module Datum
   @@data_files, @@loaded_data, @@dirs = nil
