@@ -2,8 +2,8 @@
 require "datum/helpers"
 require "datum/datum"
 require "datum/container"
-require "datum/test_case"
-require "datum/scenario"
+require "support/test"
+require "support/scenario"
 
 module Datum
   @@scenario_path, @@data_path, @@datum_path = nil
