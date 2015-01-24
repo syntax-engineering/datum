@@ -1,34 +1,21 @@
+
 require "datum/helpers"
-require "datum/datum_struct"
-require "datum/data_context"
+require "datum/datum"
+require "datum/container"
+require "datum/test_case"
+require "datum/scenario"
 
-def data_test name, &block
-  #Datum::DataFile.instance_variable_set(:"@context", Datum::DataContext.new(name, self))
-  c = Datum::DataContext.new(name, self)
-  self.send(:define_method, name, &block)
-  self.class_eval(Datum::Helpers.send(:read_file, name, Datum::Helpers.data_directory))
-  #Datum::DataFile.instance_variable_set(:"@context", nil);
-end
+module Datum
+  @@scenario_path, @@data_path, @@datum_path = nil
+  @@all_containers, @@loaded_data = nil
 
-# Extends ActiveSupport::Test with the process_scenario method
-#
-# @note supports most extending test types (functional, integration, etc)
-#
-class ActiveSupport::TestCase
-  # imports a scenario file into the context of a test
-  def process_scenario scenario_name
-    __import(scenario_name)
+  class << self
+    def path; @@datum_path ||= Rails.root.join('test', 'datum'); end
+    def data_path; @@data_path ||= ::Datum.path.join('data'); end
+    def scenario_path; @@scenario_path ||= ::Datum.path.join('scenarios'); end
+    def containers; @@all_containers ||= {}; end
+    def loaded_data; @@loaded_data ||= {}; end
+  private
+    def current_container; @current_container; end;
   end
-end
-
-# imports a scenario into an existing scenario or test
-def __import scenario_name
-  Datum::Helpers.send :import_file, scenario_name, Datum::Helpers.scenario_directory, binding
-  #Datum.import_file(scenario_name, Datum.directories.scenario, binding)
-end
-
-# clones the attributes of a resource, overriding as directed
-def __clone resource, override_hash = nil
-  Datum::Helpers.scenario_clone_resource resource, override_hash
-  #Datum::Scenario.send :scenario_clone_resource, resource, override_hash
 end
