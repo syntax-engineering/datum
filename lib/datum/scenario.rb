@@ -16,7 +16,7 @@ end
 
 # imports a scenario into an existing scenario or test
 def __import scenario_name
-  Datum.send :import_file, scenario_name, Datum.directories.scenario, binding
+  Datum::DataContext.send :import_file, scenario_name, Datum::Helpers.scenario_directory, binding
   #Datum.import_file(scenario_name, Datum.directories.scenario, binding)
 end
 
