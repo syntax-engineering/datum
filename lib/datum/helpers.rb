@@ -27,6 +27,22 @@ class Helpers
       @@scenario_directory ||= datum_directory.join('scenarios')
     end
 
+    def read_file file, directory, ext = ".rb"
+        File.read directory.join("#{file}#{ext}")
+    end
+
+    def import_file name, directory, current_binding
+      eval(read_file(name, directory), current_binding)
+    end
+
+    def scenario_clone_resource resource, override_hash = nil
+      override_hash.nil? ?
+        resource.dup.attributes.with_indifferent_access :
+        resource.dup.attributes.merge(
+          override_hash.with_indifferent_access).with_indifferent_access
+    end
+
+
   end
 end
 end

@@ -20,11 +20,10 @@ private
     alias_method :datum_initialize, :initialize
     attr_reader :datum_data_method, :datum_test_instance, :datum_test_method, :datum_count, :datum_length, :datum_data_file
 
-    def initialize(*attrs)
+    def initialize(*atrs)
       dtm_id = configure_datum_properties
-      if is_hash_case?(*attrs); attrs.first[:datum_id] = dtm_id
-      else; attrs.push(dtm_id) end
-      datum_initialize(*attrs)
+      is_hash_case?(*atrs) ? atrs.first[:datum_id] = dtm_id : atrs.push(dtm_id)
+      datum_initialize(*atrs)
     end
 
     def datum_count; datum_data_file.test_count; end

@@ -1,6 +1,6 @@
 module Plan9
 
-# Though organized differently, this code is reused from 'ImmutableStruct'
+# Re-organized slightly, this code is reused from 'ImmutableStruct'
 # by Theo Hultberg. See https://github.com/iconara/immutable_struct
 # Copyright notice mentioned in the LICENSE file.
 #

@@ -34,13 +34,7 @@ private
       def context; @context; end;
       def loaded_data; @@loaded_data ||= {}; end
 
-      def read_file file, directory, ext = ".rb"
-        File.read directory.join("#{file}#{ext}")
-      end
 
-      def import_file name, directory, current_binding
-        eval(read_file(name, directory), current_binding)
-      end
     end
 
 end
