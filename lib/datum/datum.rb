@@ -9,6 +9,10 @@ class Datum < Plan9::ImmutableStruct
     super(*attrs, &block)
   end
 
+  def self.key test_instance, test_name
+    Helpers.build_key(test_instance, test_name)
+  end
+
 protected
   def self.init_new(struct)
     super(struct)
@@ -31,8 +35,8 @@ private
 
     private
     def configure_attributes
-      @container = ::Datum.send(:"current_container")
-      (dtm_id, @test_method_name, key = @container.send(:add_datum, self))[0]
+      @container = ::Datum.send(:current_container)
+      (dtm_id, @test_method_name = @container.send(:add_datum, self))[0]
     end
   end
   end

@@ -1,16 +1,24 @@
 module Datum
 class Helpers
   class << self
-    def test_to_data_method_with_index(test_name)
-     [test_name.slice(/(?<=_).*(?=_)/), ((test_name.to_s.split('_')[-1]).to_i)]
+    def index_from_test_name test_name
+      ((test_name.to_s.split('_')[-1]).to_i)
     end
 
-    def build_data_test_name data_method_name, counter
+    def data_method_from_test_name test_name
+      test_name.slice(/(?<=_).*(?=_)/)
+    end
+
+    #def test_to_data_method_with_index(test_name)
+    # [data_method_from_test_name, index_from_test_name(test_name)]
+    #end
+
+    def build_test_name data_method_name, counter
      "test_#{data_method_name}_#{counter}"
     end
 
-    def build_datum_key test_instance, data_test_method
-     "#{test_instance}_#{data_test_method}"
+    def build_key test_instance, method
+     "#{test_instance}_#{method}"
     end
 
     def read_file file, directory, ext = ".rb"
