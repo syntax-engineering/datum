@@ -26,7 +26,7 @@ class Container
 private
 
   def add_datum datum
-    test_name = Helpers.build_test_name(data_method_name, test_count)
+    test_name = Helpers.build_test_name(data_method_name, test_count + 1)
     @loaded_data[Datum.key(test_instance, test_name)] = datum
     add_data_test test_name
     [count, test_name]
