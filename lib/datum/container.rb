@@ -2,6 +2,7 @@ require "datum/helpers"
 
 module Datum
 # A Container object holds attributes for a single data test.
+#
 class Container
 
   # Creates a Hash key formatted for use with a Container.
