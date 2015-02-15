@@ -5,11 +5,13 @@ require "datum/datum"
 # Extends ActiveSupport::Test with the process_scenario method and includes
 # the Datum module
 #
-# @note supports most extending test types (functional, integration, etc)
+# @note Supports most extending test types (functional, integration, etc)
 class ActiveSupport::TestCase
   include Datum
-  # imports a scenario file into the context of current test
+  # Imports a scenario file into the execution context of the current test
+  #
   # @param scenario_name (Symbol) the name of a scenario file
+  #
   # @example Include a scenario
   #   test "should check name" do
   #     process_scenario :names_of_various_types
@@ -27,8 +29,10 @@ end
 
 # Used to define a test to work in conjuction with Datum struct extensions
 # found in a file with the same name in the test/datum/data directory
+#
 # @param name (String) name of the file in the datum/data directory
 # @param block (block) a block of Ruby code
+#
 # @example Create a data_test
 #   data_test "various names should work" do
 #     assert_not_nil @datum.name, "Datum did not load data"
