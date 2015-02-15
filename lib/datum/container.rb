@@ -36,8 +36,9 @@ class Container
   alias_method :test_count, :count
 
   # @!method self.key tst_instance, data_method_name
-  #   @param tst_instance [TestCase] the TestCase instance for the data_test
-  #   @param data_method_name [String] the name of the data_test method
+  # Creates a Hash key formatted for use with a Container
+  # @param tst_instance [TestCase] the TestCase instance for the data_test
+  # @param data_method_name [String] the name of the data_test method
   # @return [String] Container compatible Hash key
   def self.key tst_instance, data_method_name
     Helpers.build_key(tst_instance, data_method_name)

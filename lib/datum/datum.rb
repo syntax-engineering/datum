@@ -11,6 +11,8 @@ class Datum < Plan9::ImmutableStruct
     super(*attrs, &block)
   end
 
+  # @!visibility public
+  # Creates a Hash key for use with a Datum
   # @param test_instance [TestCase] the TestCase instance for the test
   # @param test_name [String] the name of the test
   # @return [String] Datum compatible Hash key
