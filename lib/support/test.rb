@@ -31,7 +31,7 @@ end
 # found in a file with the same name in the test/datum/data directory
 #
 # @param [String] name Name of the file in the datum/data directory
-# @param [Block] &block A block of Ruby code
+# @param [Block] block A block of Ruby code
 #
 # @example Create a data_test
 #   data_test "various names should work" do
