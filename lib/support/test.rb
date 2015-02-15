@@ -9,16 +9,6 @@ require "datum/datum"
 class ActiveSupport::TestCase
   include Datum
   # Imports a scenario file into the execution context of the current test
-  # @example Process a scenario
-  #   test "should check name" do
-  #     process_scenario :names_of_various_types
-  #     assert_not_nil @scenario_loaded_resource.name
-  #   end
-  #   # process_scenario will look in test/datum/scenarios for the file
-  #   # names_of_various_types.rb. That scenario will be processed in the
-  #   # execution context of this test. For the purposes of this example,
-  #   # the scenario would contain the following:
-  #   #  @scenario_loaded_resource = OpenStruct.new name: "John Smith"
   #
   # @param [:symbol, String] scenario_name The name of a scenario file
   def process_scenario scenario_name
@@ -31,23 +21,6 @@ end
 #
 # @param [String] name Name of the file in the datum/data directory
 # @param [Block] block A block of Ruby code
-#
-# @example Define a data_test
-#   data_test "various names should work" do
-#     assert_not_nil @datum.name, "Datum did not load data"
-#     assert My_API.add_name @datum.name, "API returned false for valid name"
-#   end
-#   # for this example, the file test/datum/data/various_names_should_work.rb
-#   # the file looks like this:
-#   #   VariousNames = Datum.new(:name)
-#   #   VariousNames.new "Jane Doe"
-#   #   VariousNames.new "John Smith"
-#   #   VariousNames.new "John Doe"
-#   #
-#   # when the data_test is executed, it is called with each instance of the
-#   # created Datum. In this example, the data_test "various names should work"
-#   # is called three times, with 'name' being different for each instance
-#   # and My_API.add_name being checked against each valid case.
 def data_test name, &block
   ::Datum::Container.new(name, self)
   self.send(:define_method, name, &block)
