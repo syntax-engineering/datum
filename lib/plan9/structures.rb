@@ -1,5 +1,7 @@
 module Plan9
 
+# A few improvements to a Ruby Struct
+#
 # Re-organized slightly, this code is reused from 'ImmutableStruct'
 # by Theo Hultberg. See https://github.com/iconara/immutable_struct
 # Copyright notice mentioned in the LICENSE file.
@@ -27,6 +29,8 @@ private
         end
       end
 
+    protected
+      # @return (bool) true if attrs are Hash, false otherwise
       def is_hash_case?(*a)
         members.size > 1 && a && a.size == 1 && a.first.instance_of?(Hash)
       end
@@ -42,6 +46,11 @@ private
   end
 end
 
+# A read-only Struct
+#
+# Re-organized slightly, this code is reused from 'ImmutableStruct'
+# by Theo Hultberg. See https://github.com/iconara/immutable_struct
+# Copyright notice mentioned in the LICENSE file.
 class ImmutableStruct < ImprovedStruct
 protected
   def self.init_new(struct)
@@ -51,6 +60,7 @@ protected
 
 private
   def self.make_immutable!(struct)
+    # removes the member= method, to prevent write
     struct.send(:undef_method, "[]=".to_sym)
     struct.members.each do |member|
       struct.send(:undef_method, "#{member}=".to_sym)

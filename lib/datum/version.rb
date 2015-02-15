@@ -8,7 +8,4 @@ end
 ## Original datum, proof-of-concept
 ##
 ## 4.0.0
-## Full rewrite, updated with latest concepts and code
-##
-## Includes:
-##
+## Full rewrite, updated with latest concepts and code -- Still in Testing

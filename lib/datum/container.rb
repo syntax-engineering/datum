@@ -1,10 +1,13 @@
 require "datum/helpers"
 
 module Datum
-# Represents a data file for a Data Test
+# A Container object holds attributes for a single data test.
 class Container
 
-  attr_reader :data_method_name, :test_instance, :loaded_data, :invoked_data
+  # @return [String] the name of the data test method
+  attr_reader :data_method_name
+  # @return [TestCase] the ActiveSupport::TestCase instance of the data test
+  attr_reader :test_instance
 
   # constructor
   #
@@ -17,17 +20,18 @@ class Container
       Container.key(@test_instance, @data_method_name))
   end
 
-  # The total number of datums
+  # @return [int] The total number of tests / data elements / datums
   def count; @loaded_data.count + @invoked_data.count; end;
-  # All datums (loaded & invoked)
+  # @return [Hash] of data
   def data; @loaded_data.merge(@invoked_data); end
 
-  # The total number of datums
   alias_method :length, :count
   alias_method :size, :count
   alias_method :test_count, :count
 
-  # Container Hash key
+  # @param [TestCase] the ActiveSupport::TestCase instance for the data_test
+  # @param [String] the name of the data_test method
+  # @return [String] Container compatible Hash key
   def self.key tst_instance, data_method_name
     Helpers.build_key(tst_instance, data_method_name)
   end
@@ -42,7 +46,7 @@ private
   end
 
   def invoke_datum key, tst_case
-    invoked_data[key] = datum = loaded_data.delete(key)
+    @invoked_data[key] = datum = @loaded_data.delete(key)
     tst_case.instance_variable_set :@datum, datum
     tst_case.send datum.container.data_method_name
   end

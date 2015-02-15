@@ -10,13 +10,13 @@ module Datum
 
   class << self
 
-    # Fully qualified Pathname for the root Datum directory
+    # @return [Pathname] fully qualified path for the root of datum directory
     def path; @@datum_path ||= Rails.root.join('test', 'datum'); end
-    # Fully qualified Pathname for the datum/data directory
+    # @return [Pathname] fully qualified path for the datum/data directory
     def data_path; @@data_path ||= ::Datum.path.join('data'); end
-    # Fully qualified Pathname for the datum/scenarios directory
+    # @return [Pathname] fully qualified path for the datum/scenarios directory
     def scenario_path; @@scenario_path ||= ::Datum.path.join('scenarios'); end
-    # A Hash of all current Container references
+    # @return [Hash] Hash of all loaded Containers
     def containers; @@all_containers ||= {}; end
 
   private

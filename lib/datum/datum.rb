@@ -3,17 +3,20 @@ require "datum/helpers"
 require "plan9/structures"
 
 module Datum
+# Datum ImmutableStruct to be extended by data_test test cases
 class Datum < Plan9::ImmutableStruct
   def self.new(*attrs, &block)
     attrs.push "datum_id"
     super(*attrs, &block)
   end
 
+  # @return [String] Datum compatible Hash key
   def self.key test_instance, test_name
     Helpers.build_key(test_instance, test_name)
   end
 
 protected
+
   def self.init_new(struct)
     super(struct)
     datumize_constructor!(struct)
@@ -25,7 +28,11 @@ private
 
   struct.class_eval do
     alias_method :datum_initialize, :initialize
-    attr_reader :test_method_name, :container
+
+    # @return [String] The name of the test method
+    attr_reader :test_method_name
+    # @return [Container] A reference to the Container of this Datum
+    attr_reader :container
 
     def initialize(*atrs)
       dtm_id = configure_attributes
