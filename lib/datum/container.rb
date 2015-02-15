@@ -5,11 +5,11 @@ module Datum
 class Container
 
   # @!attribute [r] data_method_name
-  #   @return [String] The name of the data test method
+  # @return [String] The name of the data test method
   attr_reader :data_method_name
 
   # @!attribute [r] test_instance
-  #   @return [TestCase] The ActiveSupport::TestCase instance of the data test
+  # @return [TestCase] The ActiveSupport::TestCase instance of the data test
   attr_reader :test_instance
 
   # @!visibility private
@@ -23,11 +23,12 @@ class Container
   end
 
   # @!attribute [r] count
-  #   @return [int] The total number of tests / data elements / datums
+  # @return [int] The total number of tests / data elements / datums
   def count; @loaded_data.count + @invoked_data.count; end;
 
   # @!attribute [r] data
-  #   @return [Hash] A Hash of data elements, datum structs for the test case
+  # A Hash of data elements, datum structs for the test case
+  # @return [Hash] A Hash of data elements, datum structs for the test case
   def data; @loaded_data.merge(@invoked_data); end
 
   alias_method :length, :count
@@ -37,7 +38,7 @@ class Container
   # @!method self.key tst_instance, data_method_name
   #   @param tst_instance [TestCase] the TestCase instance for the data_test
   #   @param data_method_name [String] the name of the data_test method
-  #   @return [String] Container compatible Hash key
+  # @return [String] Container compatible Hash key
   def self.key tst_instance, data_method_name
     Helpers.build_key(tst_instance, data_method_name)
   end
