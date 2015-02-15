@@ -9,9 +9,7 @@ require "datum/datum"
 class ActiveSupport::TestCase
   include Datum
   # Imports a scenario file into the execution context of the current test
-  #
   # @param [:symbol, String] scenario_name The name of a scenario file
-  #
   # @example Process a scenario
   #   test "should check name" do
   #     process_scenario :names_of_various_types
