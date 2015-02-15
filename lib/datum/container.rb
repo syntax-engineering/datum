@@ -13,8 +13,8 @@ class Container
   attr_reader :test_instance
 
   # @!visibility private
-  # @param [String] data_method_name the name of test method to be called
-  # @param [TestCase] tst_instance the instance containing the data_method_name
+  # @param [String] data_method_name The name of test method to be called
+  # @param [TestCase] tst_instance The instance containing the data_method_name
   def initialize(data_method_name, tst_instance)
     @data_method_name = data_method_name; @test_instance = tst_instance
     @loaded_data = {}; @invoked_data = {}
