@@ -1,9 +1,9 @@
-# Datum: A flexible data-driven test solution for Rails
+## Datum: A flexible data-driven test solution for Rails
 
-## Synopsis
+### Synopsis
 Datum is a data-driven test solution for Rails. It enables an easy-to-use mechanism for generating test cases based on data attributes as well as a streamlined test database seeding method.
 
-## Feature List
+### Feature List
 
 **1. Data structures as a source for test generation**: Datum adds a data-driven extension to the default Rails testing infrastructure. It includes the new data_test method which couples data structure definitions with test generation.
 
@@ -11,7 +11,7 @@ Datum is a data-driven test solution for Rails. It enables an easy-to-use mechan
 
 **3. Test helpers and library functions loaded as needed**: To reduce the clutter of utility code, data-driven test generation and Scenario loading is further extended to enable per test and per test class libraries.
 
-## Installing
+### Installing
 Update your Gemfile with:
 
 ```ruby
@@ -24,7 +24,7 @@ Next run the bundle command:
 bundle install
 ```
 
-## Usage
+### Usage
 
 ```ruby
  ## coming soon
@@ -34,7 +34,7 @@ bundle install
 
 
 
-## License
+### License
 
 MIT License. Copyright 2012-2015 Tyemill. http://tyemill.com
 
