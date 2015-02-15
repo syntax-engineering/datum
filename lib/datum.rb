@@ -10,15 +10,19 @@ module Datum
   @@all_containers, @@scenario_path, @@data_path, @@datum_path = nil
 
   class << self
+
     # @!attribute [r] path
     # @return [Pathname] fully qualified path for the root of datum directory
     def path; @@datum_path ||= Rails.root.join('test', 'datum'); end
+
     # @!attribute [r] data_path
     # @return [Pathname] fully qualified path for the datum/data directory
     def data_path; @@data_path ||= ::Datum.path.join('data'); end
+
     # @!attribute [r] scenario_path
     # @return [Pathname] fully qualified path for the datum/scenarios directory
     def scenario_path; @@scenario_path ||= ::Datum.path.join('scenarios'); end
+
     # @!attribute [r] containers
     # @return [Hash] Hash of all loaded Containers
     def containers; @@all_containers ||= {}; end

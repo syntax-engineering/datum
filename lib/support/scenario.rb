@@ -10,6 +10,7 @@ end
 #
 # @param [ActiveRecord::Base] resource An ActiveRecord Model instance
 # @param [Hash] override_hash Hash of attributes / values to override from
+#
 # @return [Hash] Hash of attributes from provided resource
 def __clone resource, override_hash = nil
   ::Datum::Helpers.clone_resource resource, override_hash
