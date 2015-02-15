@@ -13,8 +13,8 @@ class Container
   attr_reader :test_instance
 
   # @!visibility private
-  # @param data_method_name [String] the name of test method to be called
-  # @param tst_instance [TestCase] the instance containing the data_method_name
+  # @param [String] data_method_name the name of test method to be called
+  # @param [TestCase] tst_instance the instance containing the data_method_name
   def initialize(data_method_name, tst_instance)
     @data_method_name = data_method_name; @test_instance = tst_instance
     @loaded_data = {}; @invoked_data = {}
@@ -35,10 +35,10 @@ class Container
   alias_method :size, :count
   alias_method :test_count, :count
 
-  # @!method self.key tst_instance, data_method_name
   # Creates a Hash key formatted for use with a Container
-  # @param tst_instance [TestCase] the TestCase instance for the data_test
-  # @param data_method_name [String] the name of the data_test method
+  #
+  # @param [TestCase] tst_instance the TestCase instance for the data_test
+  # @param [String] data_method_name the name of the data_test method
   # @return [String] Container compatible Hash key
   def self.key tst_instance, data_method_name
     Helpers.build_key(tst_instance, data_method_name)
