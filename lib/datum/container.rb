@@ -1,10 +1,15 @@
 require "datum/helpers"
 
 module Datum
+# Represents a data file for a Data Test
 class Container
 
   attr_reader :data_method_name, :test_instance, :loaded_data, :invoked_data
 
+  # constructor
+  #
+  # @param data_method_name [String] the name of test method to be called
+  # @param tst_instance [TestCase] the instance containing the data_method_name
   def initialize(data_method_name, tst_instance)
     @data_method_name = data_method_name; @test_instance = tst_instance
     @loaded_data = {}; @invoked_data = {}
@@ -12,13 +17,17 @@ class Container
       Container.key(@test_instance, @data_method_name))
   end
 
+  # The total number of datums
   def count; @loaded_data.count + @invoked_data.count; end;
+  # All datums (loaded & invoked)
   def data; @loaded_data.merge(@invoked_data); end
 
+  # The total number of datums
   alias_method :length, :count
   alias_method :size, :count
   alias_method :test_count, :count
 
+  # Container Hash key
   def self.key tst_instance, data_method_name
     Helpers.build_key(tst_instance, data_method_name)
   end

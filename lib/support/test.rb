@@ -10,7 +10,7 @@ require "datum/datum"
 #
 class ActiveSupport::TestCase
   include Datum
-  # imports a scenario file into the context of a test
+  # imports a scenario file into the context of curent test
   def process_scenario scenario_name
     __import(scenario_name)
   end
