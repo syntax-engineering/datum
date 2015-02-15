@@ -10,6 +10,7 @@ class Container
   # @return [TestCase] The ActiveSupport::TestCase instance of the data test
   attr_reader :test_instance
 
+  # @!visibility private
   # @param data_method_name [String] the name of test method to be called
   # @param tst_instance [TestCase] the instance containing the data_method_name
   def initialize(data_method_name, tst_instance)
@@ -28,6 +29,7 @@ class Container
   alias_method :length, :count
   alias_method :size, :count
   alias_method :test_count, :count
+
 
   # @param tst_instance [TestCase] the TestCase instance for the data_test
   # @param data_method_name [String] the name of the data_test method
