@@ -10,7 +10,19 @@ class ActiveSupport::TestCase
   include Datum
   # Imports a scenario file into the execution context of the current test
   #
+  # @example Process a scenario
+  #   test "should check name" do
+  #     process_scenario :names_of_various_types
+  #     assert_not_nil @scenario_loaded_resource.name
+  #   end
+  #   # process_scenario will look in test/datum/scenarios for the file
+  #   # names_of_various_types.rb. That scenario will be processed in the
+  #   # execution context of this test. For the purposes of this example,
+  #   # the scenario would contain the following:
+  #   #  @scenario_loaded_resource = OpenStruct.new name: "John Smith"
+  #
   # @param [:symbol, String] scenario_name The name of a scenario file
+  #
   def process_scenario scenario_name
     __import(scenario_name)
   end
