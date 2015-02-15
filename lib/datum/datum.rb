@@ -6,6 +6,9 @@ module Datum
 # @api
 # Datum ImmutableStruct to be extended by data_test test cases
 class Datum < Plan9::ImmutableStruct
+  # @api private
+  # @private
+  # @!visibility private
   def self.new(*attrs, &block)
     attrs.push "datum_id"
     super(*attrs, &block)
