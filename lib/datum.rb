@@ -12,15 +12,15 @@ module Datum
   class << self
 
     # @!attribute [r] path
-    # @return [Pathname] fully qualified path for the root of datum directory
+    # @return [Pathname] Fully qualified path for the root of datum directory
     def path; @@datum_path ||= Rails.root.join('test', 'datum'); end
 
     # @!attribute [r] data_path
-    # @return [Pathname] fully qualified path for the datum/data directory
+    # @return [Pathname] Fully qualified path for the datum/data directory
     def data_path; @@data_path ||= ::Datum.path.join('data'); end
 
     # @!attribute [r] scenario_path
-    # @return [Pathname] fully qualified path for the datum/scenarios directory
+    # @return [Pathname] Fully qualified path for the datum/scenarios directory
     def scenario_path; @@scenario_path ||= ::Datum.path.join('scenarios'); end
 
     # @!attribute [r] containers

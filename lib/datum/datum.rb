@@ -6,6 +6,7 @@ module Datum
 # Datum ImmutableStruct to be extended by data_test test cases
 class Datum < Plan9::ImmutableStruct
   # Creates a Hash key formatted for use with a Datum
+  #
   # @param [TestCase] test_instance The TestCase instance for the test
   # @param [String] test_name The name of the test
   # @return [String] Datum compatible Hash key

@@ -37,6 +37,7 @@ class Container
 
   # @!attribute [r] data
   # A Hash of data elements, datum structs for the test case
+  #
   # @return [Hash] A Hash of data elements, datum structs for the test case
   def data; @loaded_data.merge(@invoked_data); end
 
