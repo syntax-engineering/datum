@@ -4,7 +4,8 @@ require "datum/helpers"
 require "datum/container"
 require "datum/datum"
 
-# Extends ActiveSupport::Test with the process_scenario method
+# Extends ActiveSupport::Test with the process_scenario method and includes
+# the Datum module
 #
 # @note supports most extending test types (functional, integration, etc)
 class ActiveSupport::TestCase
@@ -15,11 +16,12 @@ class ActiveSupport::TestCase
   #   test "should check name" do
   #     # process_scenario will look in test/datum/scenarios for the file
   #     # names_of_various_types.rb. That scenario will be processed in the
-  #     # context of this test. For the purposes of this example, the scenario
-  #     # is expected to create an object referenced as
-  #     # @scenario_loaded_resource with an attribute 'name'
+  #     # execution context of this test. For the purposes of this example,
+  #     # the scenario would contain the following:
+  #     #  @scenario_loaded_resource = OpenStruct.new name: "John Smith"
+  #
   #     process_scenario :names_of_various_types
-  #     assert_not_nil @scenario_loaded_resource.name, "scenario did not load resource"
+  #     assert_not_nil @scenario_loaded_resource.name
   #   end
   def process_scenario scenario_name
     __import(scenario_name)
@@ -30,6 +32,22 @@ end
 # found in a file with the same name in the test/datum/data directory
 # @param name (String) name of the file in the datum/data directory
 # @param block (block) a block of Ruby code
+# @example Create a data_test
+#   data_test "various names should work" do
+#     assert_not_nil @datum.name, "Datum did not load data"
+#     assert My_API.add_name @datum.name, "API returned false for valid name"
+#   end
+#   # for this example, the file test/datum/data/various_names_should_work.rb
+#   # the file looks like this:
+#   #   VariousNames = Datum.new(:name)
+#   #   VariousNames.new "Jane Doe"
+#   #   VariousNames.new "John Smith"
+#   #   VariousNames.new "John Doe"
+#   #
+#   # when the data_test is executed, it is called with each instance of the
+#   # created Datum. In this example, the data_test "various names should work"
+#   # is called three times, with 'name' being different for each instance
+#   # and My_API.add_name being checked against each valid case.
 def data_test name, &block
   ::Datum::Container.new(name, self)
   self.send(:define_method, name, &block)
