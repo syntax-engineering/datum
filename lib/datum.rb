@@ -6,7 +6,6 @@ require "support/test"
 require "support/scenario"
 
 # Datum is a flexible data-driven test solution for Rails
-#
 module Datum
   @@all_containers, @@scenario_path, @@data_path, @@datum_path = nil
 
