@@ -1,0 +1,2 @@
+--exclude /lib/plan9/
+--exclude /lib/datum/helpers.rb

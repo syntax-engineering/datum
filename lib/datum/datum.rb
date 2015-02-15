@@ -10,6 +10,8 @@ class Datum < Plan9::ImmutableStruct
     super(*attrs, &block)
   end
 
+  # @param tst_instance [TestCase] the TestCase instance for the data_test
+  # @param data_method_name [String] the name of the data_test method
   # @return [String] Datum compatible Hash key
   def self.key test_instance, test_name
     Helpers.build_key(test_instance, test_name)

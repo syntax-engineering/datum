@@ -47,7 +47,7 @@ class Helpers
 
     # @param resource [ActiveRecord::Base] an ActiveRecord Model instance
     # @param override_hash [Hash] Hash of attributes / values to override from
-    # return [Hash] Hash of attributes from provided resource
+    # @return [Hash] Hash of attributes from provided resource
     def clone_resource resource, override_hash = nil
       override_hash.nil? ? resource.dup.attributes.with_indifferent_access :
         resource.dup.attributes.merge(
