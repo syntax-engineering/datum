@@ -1,7 +1,6 @@
 require "datum/helpers"
 
 module Datum
-# @api
 # A Container object holds attributes for a single data test.
 class Container
 

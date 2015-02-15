@@ -1,10 +1,7 @@
-
-
 require "datum/helpers"
 require "datum/container"
 require "datum/datum"
 
-# @api
 # Extends ActiveSupport::Test with the process_scenario method and includes
 # the Datum module
 #
@@ -28,7 +25,6 @@ class ActiveSupport::TestCase
   end
 end
 
-# @api
 # Used to define a test to work in conjuction with Datum struct extensions
 # found in a file with the same name in the test/datum/data directory
 # @param name (String) name of the file in the datum/data directory

@@ -1,5 +1,6 @@
 module Datum
-# @api private
+
+# @!visibility private
 # Various helper functions
 class Helpers
   class << self
