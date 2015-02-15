@@ -4,6 +4,15 @@ module Datum
 # A Container object holds attributes for a single data test.
 class Container
 
+  # Creates a Hash key formatted for use with a Container
+  #
+  # @param [TestCase] tst_instance The TestCase instance for the data_test
+  # @param [String] data_method_name The name of the data_test method
+  # @return [String] Container compatible Hash key
+  def self.key tst_instance, data_method_name
+    Helpers.build_key(tst_instance, data_method_name)
+  end
+
   # @!attribute [r] data_method_name
   # @return [String] The name of the data test method
   attr_reader :data_method_name
@@ -34,15 +43,6 @@ class Container
   alias_method :length, :count
   alias_method :size, :count
   alias_method :test_count, :count
-
-  # Creates a Hash key formatted for use with a Container
-  #
-  # @param [TestCase] tst_instance The TestCase instance for the data_test
-  # @param [String] data_method_name The name of the data_test method
-  # @return [String] Container compatible Hash key
-  def self.key tst_instance, data_method_name
-    Helpers.build_key(tst_instance, data_method_name)
-  end
 
 private
 
