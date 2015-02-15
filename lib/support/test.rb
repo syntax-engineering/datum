@@ -13,6 +13,11 @@ class ActiveSupport::TestCase
   # @param scenario_name (Symbol) the name of a scenario file
   # @example Include a scenario
   #   test "should check name" do
+  #     # process_scenario will look in test/datum/scenarios for the file
+  #     # names_of_various_types.rb. That scenario will be processed in the
+  #     # context of this test. For the purposes of this example, the scenario
+  #     # is expected to create an object referenced as
+  #     # @scenario_loaded_resource with an attribute 'name'
   #     process_scenario :names_of_various_types
   #     assert_not_nil @scenario_loaded_resource.name, "scenario did not load resource"
   #   end
