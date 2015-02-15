@@ -1,4 +1,5 @@
 module Datum
+# @private
 # Various helper functions
 class Helpers
   class << self

@@ -1,3 +1,5 @@
+# @private
+# Module for simple code reuse between various projects.
 module Plan9
 
 # A few improvements to a Ruby Struct

@@ -11,6 +11,11 @@ class ActiveSupport::TestCase
   include Datum
   # imports a scenario file into the context of current test
   # @param scenario_name (Symbol) the name of a scenario file
+  # @example Include a scenario
+  #   test "should check name" do
+  #     process_scenario :names_of_various_types
+  #     assert_not_nil @scenario_loaded_resource.name, "scenario did not load resource"
+  #   end
   def process_scenario scenario_name
     __import(scenario_name)
   end

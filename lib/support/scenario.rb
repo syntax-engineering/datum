@@ -8,7 +8,7 @@ end
 # for use in a scenario file, clones the attributes of an existing instance
 # @param resource [ActiveRecord::Base] an ActiveRecord Model instance
 # @param override_hash [Hash] Hash of attributes / values to override from
-# return [Hash] Hash of attributes from provided resource
+# @return [Hash] Hash of attributes from provided resource
 def __clone resource, override_hash = nil
   ::Datum::Helpers.clone_resource resource, override_hash
 end
