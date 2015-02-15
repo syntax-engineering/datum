@@ -1,4 +1,4 @@
-# @private
+# @api private
 module Plan9 # Module for simple code reuse between various projects.
 
 # @private

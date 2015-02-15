@@ -1,5 +1,5 @@
 module Datum
-# @private
+# @api private
 # Various helper functions
 class Helpers
   class << self

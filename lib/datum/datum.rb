@@ -3,6 +3,7 @@ require "datum/helpers"
 require "plan9/structures"
 
 module Datum
+# @api
 # Datum ImmutableStruct to be extended by data_test test cases
 class Datum < Plan9::ImmutableStruct
   def self.new(*attrs, &block)
