@@ -10,7 +10,7 @@ class ActiveSupport::TestCase
   include Datum
   # Imports a scenario file into the execution context of the current test
   #
-  # @param [Symbol, String] scenario_name The name of a scenario file
+  # @param [:symbol || String] scenario_name The name of a scenario file
   #
   # @example Include a scenario
   #   test "should check name" do
@@ -31,7 +31,7 @@ end
 # found in a file with the same name in the test/datum/data directory
 #
 # @param [String] name Name of the file in the datum/data directory
-# @param [block] block A block of Ruby code
+# @param [Block] &block A block of Ruby code
 #
 # @example Create a data_test
 #   data_test "various names should work" do

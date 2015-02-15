@@ -11,9 +11,10 @@ class Datum < Plan9::ImmutableStruct
     super(*attrs, &block)
   end
 
-  # Creates a Hash key for use with a Datum
-  # @param [TestCase] test_instance the TestCase instance for the test
-  # @param [String] test_name the name of the test
+  # Creates a Hash key formatted for use with a Datum
+  #
+  # @param [TestCase] test_instance The TestCase instance for the test
+  # @param [String] test_name The name of the test
   # @return [String] Datum compatible Hash key
   def self.key test_instance, test_name
     Helpers.build_key(test_instance, test_name)
