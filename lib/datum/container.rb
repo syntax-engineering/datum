@@ -5,7 +5,6 @@ module Datum
 class Container
 
   # Creates a Hash key formatted for use with a Container.
-  #
   # @param [TestCase] tst_instance The TestCase instance for the data_test
   # @param [String] data_method_name The name of the data_test method
   # @return [String] Container compatible Hash key
