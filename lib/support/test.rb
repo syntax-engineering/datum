@@ -12,7 +12,7 @@ class ActiveSupport::TestCase
   #
   # @param [:symbol, String] scenario_name The name of a scenario file
   #
-  # @example Include a scenario
+  # @example Process a scenario
   #   test "should check name" do
   #     process_scenario :names_of_various_types
   #     assert_not_nil @scenario_loaded_resource.name
@@ -27,13 +27,13 @@ class ActiveSupport::TestCase
   end
 end
 
-# Used to define a test to work in conjuction with Datum struct extensions
-# found in a file with the same name in the test/datum/data directory
+# Defines a test to work in conjuction with Datum struct extensions found in
+# a file with the same name in the test/datum/data directory
 #
 # @param [String] name Name of the file in the datum/data directory
 # @param [Block] block A block of Ruby code
 #
-# @example Create a data_test
+# @example Define a data_test
 #   data_test "various names should work" do
 #     assert_not_nil @datum.name, "Datum did not load data"
 #     assert My_API.add_name @datum.name, "API returned false for valid name"
