@@ -4,7 +4,7 @@ module Datum
 # Various helper functions
 class Helpers
   class << self
-
+    # @!visibility private
     # @param [String] test_name Test case name generated from data_test usage
     # @return [int] The index of the data_test / datum_id
     def index_from_test_name test_name
