@@ -42,10 +42,10 @@ end
 #   # first, define a sub-class of Datum to use in your test
 #   PersonData = Datum.new(:first_name, :last_name, :name, :short_name)
 #
-#   # next, use your sub-class to create datasets which will be passed to your
-#   # data_test
+#   # next, use your sub-class to create datasets which will be accessible to
+#   # your data_test as @datum
 #   #
-#   # your data can be generated / created ... here, we're keeping it simple
+#   # your data can be generated, etc... here, we're keeping it simple
 #   homer = PersonData.new("Homer", "Simpson", "Homer Simpson", "Homer S.")
 #   marge = PersonData.new("Marge", homer.last_name,
 #     "Marge #{homer.last_name}", "Marge S.")
