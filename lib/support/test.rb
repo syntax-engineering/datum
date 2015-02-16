@@ -5,6 +5,10 @@ require "datum/datum"
 # Adds the process_scenario method to ActiveSupport::TestCase and includes
 # the Datum module
 # @note Supports most extending test types (functional, integration, etc)
+# @example Making a Scenario
+#   # test/datum/scenarios/simpsons_scenario.rb
+#   # any code included in this file is loaded from a call to process_scenario
+#   @homer = Person.create(first_name: "Homer", last_name: "Simpson")
 # @!method process_scenario(scenario_name)
 #   Imports a scenario file into the execution context of the current test
 #   @param [Symbol, String] scenario_name The name of a scenario file
