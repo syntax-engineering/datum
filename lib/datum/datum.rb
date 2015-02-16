@@ -3,10 +3,16 @@ require "datum/helpers"
 require "plan9/structures"
 
 module Datum
-# Datum ImmutableStruct to be extended by data_test test cases
+# Datum is an Immutable Struct to be used for creating test cases.
 # @!attribute [r] datum_id
 #  The index of the test case and the data from it's Datum
 #  @return [Fixnum]
+# @!attribute [r] test_method_name
+#  The name of the test case generated
+#  @return [String]
+# @!attribute [r] container
+#  The Container reference which generated this Datum and test case
+#  @return [Container]
 class Datum < Plan9::ImmutableStruct
   # @!visibility private
   # Creates a Hash key formatted for use with a Datum
