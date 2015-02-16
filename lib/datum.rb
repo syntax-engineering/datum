@@ -18,7 +18,7 @@ module Datum
 
     # @!attribute [r] data_path
     # Fully qualified path for the datum/data directory
-    # @return [Pathname] Fully qualified path for the datum/data directory
+    # @return [Pathname] Fully qualified
     def data_path; @@data_path ||= ::Datum.path.join('data'); end
 
     # @!attribute [r] scenario_path
