@@ -24,7 +24,7 @@ bundle install
 
 ### Usage
 
-#### Data Driven Tests
+#### data_test: Data Driven Tests for Rails
 To get started, we'll look at a simple Person Model app/models/person.rb:
 
 ```ruby
@@ -179,7 +179,7 @@ class PersonTest < ActiveSupport::TestCase
 end
 ```
 
-#### Data-Driven Tests Combined with Scenarios
+#### Data-Driven Tests Combined with On-Demand Test DB Seeding
 To get started, we'll look at a simple Person Model app/models/person.rb:
 
 ```ruby
@@ -224,7 +224,7 @@ Let's add some initial data test/datum/data/should_confirm_shortname.rb:
   SimpleShortName.new "Maggie", m.last_name, "Maggie S."
 ```
 
-Now let's define a scenario test/datum/scenarios/simpsons_scenario.rb:
+Now let's define a Scenario test/datum/scenarios/simpsons_scenario.rb:
 
 ```ruby
  @marge   = Person.create(first_name: "Marge", last_name: "Simpson")
