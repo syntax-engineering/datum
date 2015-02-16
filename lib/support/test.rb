@@ -4,14 +4,14 @@ require "datum/datum"
 
 # Adds the process_scenario method to ActiveSupport::TestCase and includes
 # the Datum module
+# @!method process_scenario(scenario_name)
+#   Imports a scenario file into the execution context of the current test
+#   @param [Symbol, String] scenario_name The name of a scenario file
+#   @return [void]
 # @note Supports most extending test types (functional, integration, etc)
 class ActiveSupport::TestCase
   include Datum
 
-
-  # Imports a scenario file into the execution context of the current test
-  # @param [Symbol, String] scenario_name The name of a scenario file
-  # @return [void]
   def process_scenario scenario_name
     __import(scenario_name)
   end
