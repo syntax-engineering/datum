@@ -7,12 +7,16 @@
 #
 # @example Using __import
 #   # test/datum/scenarios/springfield_police_scenario.rb
+#   @clancy = Person.create(first_name: "Clancy", last_name: "Wiggum")
+#   @eddie = Person.create(first_name: "Eddie", last_name: "Police-Officer")
+#
 #   # test/datum/scenarios/extended_simpsons_scenario.rb
-#   # any code included in this file gets loaded when calling process_scenario
 #   @homer = Person.create(first_name: "Homer", last_name: "Simpson")
 #   @marge = Person.create(__clone(@homer, {first_name: "Marge"}))
 #   @bart = Person.create(__clone(@homer, {first_name: "Marge"}))
+#
 #   __import :springfield_police_scenario # will give us clancy, eddie
+#
 #   @lou = Person.create first_name: "Lou", last_name: @eddie.last_name
 def __import scenario_name
   ::Datum::Helpers.import_file scenario_name, ::Datum.scenario_path, binding
