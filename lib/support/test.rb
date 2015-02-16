@@ -7,8 +7,9 @@ require "datum/datum"
 # @note Supports most extending test types (functional, integration, etc)
 # @example Making a Scenario
 #   # test/datum/scenarios/simpsons_scenario.rb
-#   # any code included in this file is loaded from a call to process_scenario
+#   # any code included in this file gets loaded when calling process_scenario
 #   @homer = Person.create(first_name: "Homer", last_name: "Simpson")
+#   @marge = Person.create(__clone(@homer, {first_name: "Marge"}))
 # @!method process_scenario(scenario_name)
 #   Imports a scenario file into the execution context of the current test
 #   @param [Symbol, String] scenario_name The name of a scenario file
@@ -17,8 +18,8 @@ require "datum/datum"
 #     test "should verify basic scenario" do
 #       process_scenario :simpsons_scenario
 #       assert_not_nil @homer, "process_scenario did not define @homer"
+#       assert_not_nil @marge, "process_scenario did not define @marge"
 #     end
-
 class ActiveSupport::TestCase
   include Datum
 
