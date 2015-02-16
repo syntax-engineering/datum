@@ -17,7 +17,7 @@
 #
 #   __import :springfield_police_scenario # will give us clancy, eddie
 #
-#   # Using @eddie defined in imported ::springfield_police_scenario to
+#   # Using @eddie from imported :springfield_police_scenario to
 #   # define @lou's last_name
 #   @lou = Person.create first_name: "Lou", last_name: @eddie.last_name
 def __import scenario_name
