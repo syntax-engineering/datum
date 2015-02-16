@@ -20,10 +20,6 @@ class Datum < Plan9::ImmutableStruct
     super(*attrs, &block)
   end
 
-  # @!parse attr_reader :datum_id
-  # @!attribute [r] datum_id
-  #   @return [Fixnum] The index of the test case / datum instance
-
 protected
 
   def self.init_new(struct)
