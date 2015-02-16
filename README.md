@@ -22,7 +22,7 @@ Next run the bundle command:
 bundle install
 ```
 
-### Usage
+### Simple Examples
 
 #### data_test: Data Driven Tests for Rails
 To get started, we'll look at a simple Person Model app/models/person.rb:
