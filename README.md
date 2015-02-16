@@ -25,7 +25,7 @@ bundle install
 ### Usage
 
 #### Data Driven Tests
-To get started, we'll use a simple Person Model in app/models/person.rb:
+To get started, we'll look at a simple Person Model app/models/person.rb:
 
 ```ruby
 class Person < ActiveRecord::Base
@@ -44,7 +44,7 @@ class Person < ActiveRecord::Base
 end
 ```
 
-Now let's create a model test in test/models/person_test.rb:
+Now let's create a test test/models/person_test.rb:
 
 ```ruby
 require 'test_helper'
@@ -66,7 +66,7 @@ Executing the test:
 1 runs, 1 assertions, 0 failures, 0 errors, 0 skips
 ```
 
-To convert this test to a data-driven data_test:
+To convert our test to be data-driven - test/models/person_test.rb:
 
 ```ruby
 require 'test_helper'
@@ -83,9 +83,9 @@ class PersonTest < ActiveSupport::TestCase
 end
 ```
 
-In the data_test, the fixed values of the original test have been replaced with the usage of the @datum.[attribute] variable. For each dataset defined, the data_test will be called and @datum will provide access to the data.
+In the data_test, the fixed values of the original test have been replaced with the usage of the @datum.[attribute] variables. For each dataset defined, the data_test will be called and @datum will provide access.
 
-Next, we'll define our data in test/datum/data/should_confirm_shortname.rb:
+Next, we'll define our Datum and data in test/datum/data/should_confirm_shortname.rb:
 
 ```ruby
   # Sub-class the Datum struct with attributes we need for our test
@@ -126,6 +126,60 @@ Adding more datasets and thus more generated test cases: test/datum/data/should_
 
 5 runs, 5 assertions, 0 failures, 0 errors, 0 skips
 ```
+
+#### Scenarios: On-demand Test Database Seeding
+To get started, we'll look at a simple Person Model app/models/person.rb:
+
+```ruby
+class Person < ActiveRecord::Base
+
+  validates_presence_of :first_name, :last_name
+
+  # "John Doe" from first_name: "John", last_name: "Doe"
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
+
+  # "John D." from first_name: "John" last_name: "Doe"
+  def short_name
+    "#{self.first_name} #{self.last_name.capitalize[0]}."
+  end
+end
+```
+
+Now let's create a test test/models/person_test.rb:
+
+```ruby
+require 'test_helper'
+class PersonTest < ActiveSupport::TestCase
+  test 'should confirm short_name' do
+    person = Person.create first_name: "Marge", last_name: "Simpson"
+    assert_equal "Marge S.", person.short_name
+  end
+end
+```
+
+Instead of using a Fixture or defining our variables in-line, we'll modify our test to use a Scenario. First, let's define the Scenario test/datum/scenarios/simpsons_scenario.rb:
+
+```ruby
+ @marge = Person.create(first_name: "Marge", last_name: "Simpson")
+ @homer = Person.create(__clone(@marge, {first_name: "Homer"}))
+```
+
+Now, let's modify our test, test/models/person_test.rb:
+
+```ruby
+require 'test_helper'
+class PersonTest < ActiveSupport::TestCase
+  test 'should confirm short_name' do
+    process_scenario :simpsons_scenario
+    assert_equal "Marge S.", @marge.short_name
+    assert_equal "Homer S.", @homer.short_name
+  end
+end
+```
+
+
 
 
 ### License
