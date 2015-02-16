@@ -8,6 +8,11 @@ require "datum/datum"
 #   Imports a scenario file into the execution context of the current test
 #   @param [Symbol, String] scenario_name The name of a scenario file
 #   @return [void]
+#   @example Using process_scenario
+#     test "should verify basic scenario" do
+#       process_scenario :simpsons_scenario
+#       assert_not_nil @homer, "process_scenario did not define @homer"
+#     end
 # @note Supports most extending test types (functional, integration, etc)
 class ActiveSupport::TestCase
   include Datum
