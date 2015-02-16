@@ -9,7 +9,6 @@ class ActiveSupport::TestCase
   include Datum
 
   # Imports a scenario file into the execution context of the current test
-  #
   # @param [String] scenario_name The name of a scenario file
   # @return [String] The return value
   def process_scenario scenario_name
