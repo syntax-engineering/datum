@@ -9,8 +9,8 @@ class ActiveSupport::TestCase
   include Datum
 
   # Imports a scenario file into the execution context of the current test
-  # @param [String] scenario_name The name of a scenario file
-  # @return [String] The return value
+  # @param [Symbol, String] scenario_name The name of a scenario file
+  # @return [void]
   def process_scenario scenario_name
     __import(scenario_name)
   end
@@ -20,6 +20,7 @@ end
 # a file with the same name in the test/datum/data directory
 # @param [String] name Name of the file in the datum/data directory
 # @param [Block] block A block of Ruby code
+# @return [void]
 def data_test name, &block
   ::Datum::Container.new(name, self)
   self.send(:define_method, name, &block)

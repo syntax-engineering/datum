@@ -1,7 +1,7 @@
 
 # For use in a scenario file, imports an existing scenario's code and objects
-#
-# @param [symbol, String] scenario_name The name of a scenario file
+# @param [Symbol, String] scenario_name The name of a scenario file
+# @return [void]
 def __import scenario_name
   ::Datum::Helpers.import_file scenario_name, ::Datum.scenario_path, binding
 end

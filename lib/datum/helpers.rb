@@ -45,7 +45,7 @@ class Helpers
     end
 
     # @!visibility private
-    # Reads a ruby file and eval's it's contents at the current code location
+    # Reads a ruby file and eval's it's contents in the context of the Binding
     # @param [String] file_name The name of the file to import
     # @param [Pathname] directory A Pathname representing the file's directory
     # @param [Binding] current_binding Context at a particular code location
