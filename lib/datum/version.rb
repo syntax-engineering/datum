@@ -1,4 +1,5 @@
 module Datum
+  # @!visibility private
   VERSION = "4.0.5"
 end
 
