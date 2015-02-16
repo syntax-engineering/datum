@@ -8,6 +8,7 @@ require "datum/datum"
 class ActiveSupport::TestCase
   include Datum
 
+
   # Imports a scenario file into the execution context of the current test
   # @param [Symbol, String] scenario_name The name of a scenario file
   # @return [void]
@@ -16,11 +17,12 @@ class ActiveSupport::TestCase
   end
 end
 
-# Defines a test to work in conjuction with Datum struct extensions found in
-# a file with the same name in the test/datum/data directory
-# @param [String] name Name of the file in the datum/data directory
-# @param [Block] block A block of Ruby code
-# @return [void]
+# @!method data_test(name, &block)
+#   Defines a test to work in conjuction with Datum struct extensions found in
+#   a file with the same name in the test/datum/data directory
+#   @param [String] name Name of the file in the datum/data directory
+#   @param [Block] block A block of Ruby code
+#   @return [void]
 def data_test name, &block
   ::Datum::Container.new(name, self)
   self.send(:define_method, name, &block)
