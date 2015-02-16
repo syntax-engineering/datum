@@ -179,7 +179,7 @@ class PersonTest < ActiveSupport::TestCase
 end
 ```
 
-#### Data-Driven Tests Combined Scenarios
+#### Data-Driven Tests Combined with Scenarios
 To get started, we'll look at a simple Person Model app/models/person.rb:
 
 ```ruby
