@@ -37,7 +37,42 @@ end
 # @return [void]
 #
 # @example Defining a data_test
-#   # test/datum/data/simple_person_test.rb
+#   # test/datum/data/simple_person_data.rb
+#
+#   # first, define a sub-class of Datum to use in your test
+#   PersonData = Datum.new(:first_name, :last_name, :name, :short_name)
+#
+#   # next, use your sub-class to create datasets which will be passed to your
+#   # data_test
+#   #
+#   # your data can be generated / created ... here, we're keeping it simple
+#   homer = PersonData.new("Homer", "Simpson", "Homer Simpson", "Homer S.")
+#   marge = PersonData.new("Marge", homer.last_name,
+#     "Marge #{homer.last_name}", "Marge S.")
+#
+#   # test/datum/scenarios/simpsons_scenario.rb
+#
+#   @homer = Person.create(first_name: "Homer", last_name: "Simpson")
+#   @marge = Person.create(__clone(@homer, {first_name: "Marge"}))
+#
+#   # test/models/person_test.rb
+#   require 'test_helper'
+#   class PersonTest < ActiveSupport::TestCase
+#
+#     # this data method will be called once for each Datum defined in
+#     # test/datum/data/simple_person_data.rb
+#     #
+#     # each time this method is called @datum will reference the current
+#     # dataset
+#     data_test "simple_person_data" do
+#       process_scenario :simpsons_scenario
+#       person = self.instance_variable_get("@#{@datum.first_name.downcase}")
+#       assert_equal @datum.first_name, person.first_name
+#       assert_equal @datum.last_name, person.last_name
+#       assert_equal @datum.name, person.name
+#       assert_equal @datum.short_name, person.short_name
+#     end
+#   end
 def data_test name, &block
   ::Datum::Container.new(name, self)
   self.send(:define_method, name, &block)
