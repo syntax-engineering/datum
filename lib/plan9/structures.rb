@@ -1,12 +1,13 @@
 # @!visibility private
 module Plan9 # Module for simple code reuse between various projects.
-
+# @!visibility private
 class ImprovedStruct # A few improvements to a Ruby Struct
 #
 # Re-organized slightly, this code is reused from 'ImmutableStruct'
 # by Theo Hultberg. See https://github.com/iconara/immutable_struct
 # Copyright notice mentioned in the LICENSE file.
 #
+  # @!visibility private
   def self.new(*attrs, &block)
     init_new(Struct.new(*attrs, &block))
   end
@@ -48,6 +49,7 @@ private
   end
 end
 
+# @!visibility private
 class ImmutableStruct < ImprovedStruct # A read-only Struct
 # Re-organized slightly, this code is reused from 'ImmutableStruct'
 # by Theo Hultberg. See https://github.com/iconara/immutable_struct
