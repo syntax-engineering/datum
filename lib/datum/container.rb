@@ -4,22 +4,38 @@ module Datum
 # A Container object holds attributes for a single data test.
 class Container
 
+  # @!attribute [r] data_method_name
+  # The name of the data test method
+  # @return [String]
+  attr_reader :data_method_name
+
+  # @!attribute [r] test_instance
+  # The ActiveSupport::TestCase instance of the data test
+  # @return [ActiveSupport::TestCase]
+  attr_reader :test_instance
+
+  # @!attribute [r] count
+  # The total number of test cases generated for the data method
+  # @return [Fixnum]
+  def count; @loaded_data.count + @invoked_data.count; end;
+
+  # @!attribute [r] data
+  # A Hash of data elements, datum structs for the test case
+  # @return [Hash]
+  def data; @loaded_data.merge(@invoked_data); end
+
+  alias_method :length, :count
+  alias_method :size, :count
+  alias_method :test_count, :count
+
   # @!visibility private
   # Creates a Hash key formatted for use with a Container.
   # @param [TestCase] tst_instance The TestCase instance for the data_test
   # @param [String] data_method_name The name of the data_test method
-  # @return [String] Container compatible Hash key
+  # @return [String]
   def self.key tst_instance, data_method_name
     Helpers.build_key(tst_instance, data_method_name)
   end
-
-  # @!attribute [r] data_method_name
-  # @return [String] The name of the data test method
-  attr_reader :data_method_name
-
-  # @!attribute [r] test_instance
-  # @return [TestCase] The ActiveSupport::TestCase instance of the data test
-  attr_reader :test_instance
 
   # @!visibility private
   # @param [String] data_method_name The name of test method to be called
@@ -30,21 +46,6 @@ class Container
     ::Datum.send(:add_container, self,
       Container.key(@test_instance, @data_method_name))
   end
-
-  # @!attribute [r] count
-  # The total number of test cases generated for the data method
-  # @return [int] The total number of tests / data elements / datums
-  def count; @loaded_data.count + @invoked_data.count; end;
-
-  # @!attribute [r] data
-  # A Hash of data elements, datum structs for the test case
-  #
-  # @return [Hash] A Hash of data elements, datum structs for the test case
-  def data; @loaded_data.merge(@invoked_data); end
-
-  alias_method :length, :count
-  alias_method :size, :count
-  alias_method :test_count, :count
 
 private
 
