@@ -20,6 +20,8 @@ class Datum < Plan9::ImmutableStruct
     super(*attrs, &block)
   end
 
+  # @!parse attr_reader :datum_id
+
 protected
 
   def self.init_new(struct)
