@@ -8,9 +8,12 @@ end
 
 # From a scenario file, clones the attributes of an existing instance and
 # overrides as specified.
+#
 # @param [ActiveRecord::Base] resource An ActiveRecord Model instance
 # @param [Hash] override_hash Hash of attributes / values to override from
+#
 # @return [Hash] Hash of attributes from provided resource
+#
 # @example Using __clone
 #   # test/datum/scenarios/simpsons_scenario.rb
 #   # any code included in this file gets loaded when calling process_scenario
