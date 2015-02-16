@@ -7,9 +7,10 @@ require "datum/datum"
 # @note Supports most extending test types (functional, integration, etc)
 class ActiveSupport::TestCase
   include Datum
+
   # Imports a scenario file into the execution context of the current test
-  # @param [symbol, String] scenario_name The name of a scenario file
   #
+  # @param [symbol, String] scenario_name The name of a scenario file
   def process_scenario scenario_name
     __import(scenario_name)
   end
