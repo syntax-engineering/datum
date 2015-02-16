@@ -1,6 +1,6 @@
 
 # From a scenario file, imports an existing scenario's code into the current
-# Binding context.
+# Binding context of the current scenario.
 #
 # @param [Symbol, String] scenario_name The name of a scenario file
 # @return [void]

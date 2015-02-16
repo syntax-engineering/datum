@@ -1,7 +1,13 @@
 require "datum/helpers"
 
 module Datum
-# A Container object holds attributes for a single data test.
+# A Container holds attributes for a single data test.
+#
+# A data_test definition references a specific file in test/datum/data. When
+# the data file is loaded, each Datum created is associated with a Container
+# which in-turn is associated with the data_test.
+#
+# Container references are stored in Datum::containers
 class Container
 
   # @!attribute [r] data_method_name
