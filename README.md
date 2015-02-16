@@ -106,7 +106,7 @@ Executing:
 2 runs, 2 assertions, 0 failures, 0 errors, 0 skips
 ```
 
-Adding more datasets and thus more generated test cases: test/datum/data/should_confirm_shortname.rb:
+Adding more datasets and thus more generated test cases test/datum/data/should_confirm_shortname.rb:
 
 ```ruby
   SimpleShortName = Datum.new(:first_name, :last_name, :short_name)
@@ -179,8 +179,85 @@ class PersonTest < ActiveSupport::TestCase
 end
 ```
 
+#### Data-Driven Tests Combined Scenarios
+To get started, we'll look at a simple Person Model app/models/person.rb:
 
+```ruby
+class Person < ActiveRecord::Base
 
+  validates_presence_of :first_name, :last_name
+
+  # "John Doe" from first_name: "John", last_name: "Doe"
+  def name
+    "#{self.first_name} #{self.last_name}"
+  end
+
+  # "John D." from first_name: "John" last_name: "Doe"
+  def short_name
+    "#{self.first_name} #{self.last_name.capitalize[0]}."
+  end
+end
+```
+
+Now let's define a data_test test/models/person_test.rb:
+
+```ruby
+require 'test_helper'
+class PersonTest < ActiveSupport::TestCase
+  data_test 'should_confirm_shortname' do
+    person = Person.create first_name: @datum.first_name, last_name: @datum.last_name
+    assert_equal @datum.short_name, person.short_name
+  end
+end
+```
+
+Let's add some initial data test/datum/data/should_confirm_shortname.rb:
+
+```ruby
+  SimpleShortName = Datum.new(:first_name, :last_name, :short_name)
+
+  # Define instances for our test cases
+  m = SimpleShortName.new "Marge",  "Simpson", "Marge S."
+  SimpleShortName.new "Homer",  m.last_name, "Homer S."
+  SimpleShortName.new "Lisa",   m.last_name, "Lisa S."
+  SimpleShortName.new "Bart",   m.last_name, "Bart S."
+  SimpleShortName.new "Maggie", m.last_name, "Maggie S."
+```
+
+Now let's define a scenario test/datum/scenarios/simpsons_scenario.rb:
+
+```ruby
+ @marge   = Person.create(first_name: "Marge", last_name: "Simpson")
+ @homer   = Person.create(__clone(@marge, {first_name: "Homer"}))
+ @lisa    = Person.create(__clone(@marge, {first_name: "Lisa"}))
+ @bart    = Person.create(__clone(@marge, {first_name: "Bart"}))
+ @maggie  = Person.create(__clone(@marge, {first_name: "Maggie"}))
+```
+
+Now let's update our data_test to make use of our Scenario test/models/person_test.rb:
+
+```ruby
+require 'test_helper'
+class PersonTest < ActiveSupport::TestCase
+  data_test 'should_confirm_shortname' do
+    process_scenario :simpsons_scenario
+    person = self.instance_variable_get("@#{@datum.first_name.downcase}")
+    assert_equal @datum.first_name, person.first_name
+    assert_equal @datum.last_name, person.last_name
+    assert_equal @datum.short_name, person.short_name
+  end
+end
+```
+
+Executing the test:
+
+```console
+# Running:
+
+.....
+
+5 runs, 15 assertions, 0 failures, 0 errors, 0 skips
+```
 
 ### License
 
