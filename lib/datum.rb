@@ -5,9 +5,11 @@ require "datum/container"
 require "support/test"
 require "support/scenario"
 
-# Datum is a flexible data-driven test solution for Rails. Datum's primary
-# features include the data_test method (for defining data-driven tests) and
-# Scenarios, a load-on-demand mechanism for seeding the test db.
+# Datum is a flexible data-driven test solution for Rails.
+#
+# Datum's primary features include defining data-driven tests via the
+# data_test method and Scenarios, a load-on-demand mechanism for seeding the
+# test database.
 module Datum
   @@all_containers, @@scenario_path, @@data_path, @@datum_path = nil
 
