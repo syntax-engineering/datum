@@ -10,7 +10,7 @@ class ActiveSupport::TestCase
 
   # Imports a scenario file into the execution context of the current test
   #
-  # @param [Symbol, String] scenario_name The name of a scenario file
+  # @param [String] scenario_name The name of a scenario file
   # @return [String] The return value
   def process_scenario scenario_name
     __import(scenario_name)
