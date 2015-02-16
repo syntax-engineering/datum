@@ -4,6 +4,7 @@ module Datum
 # A Container object holds attributes for a single data test.
 class Container
 
+  # @!visibility private
   # Creates a Hash key formatted for use with a Container.
   # @param [TestCase] tst_instance The TestCase instance for the data_test
   # @param [String] data_method_name The name of the data_test method
@@ -31,6 +32,7 @@ class Container
   end
 
   # @!attribute [r] count
+  # The total number of test cases generated for the data method
   # @return [int] The total number of tests / data elements / datums
   def count; @loaded_data.count + @invoked_data.count; end;
 

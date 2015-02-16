@@ -7,7 +7,7 @@ Datum includes an easy-to-use mechanism for generating test cases based on data 
 ### Feature List
 **1. Data structures as a source for test generation**: Datum adds a data-driven extension to the default Rails testing infrastructure. The data_test method creates a data-driven test and cases are generated via the use of a simple data structure.
 
-**2. Scenarios for improved test db seeding**: Datum Scenarios are a per-test or per test class database seeding mechanism. Each Scenario can use any Model, can be self-container or use smaller Scenarios.
+**2. Scenarios for improved test db seeding**: Datum Scenarios are a per-test or per test class database seeding mechanism. Each Scenario can use any Model, can be self-contained or reference other Scenarios to create a larger aggregate Scenario.
 
 **3. Test helpers and library functions loaded as needed**: To reduce the clutter of utility code, data-driven test generation and Scenario loading is further extended to enable per test and per test class libraries.
 
