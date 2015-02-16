@@ -4,6 +4,8 @@ require "plan9/structures"
 
 module Datum
 # Datum ImmutableStruct to be extended by data_test test cases
+# @!attribute [r] datum_id
+#  @return [Fixnum] The index of the test case / data provided to the test
 class Datum < Plan9::ImmutableStruct
   # @!visibility private
   # Creates a Hash key formatted for use with a Datum
@@ -19,9 +21,6 @@ class Datum < Plan9::ImmutableStruct
     attrs.push "datum_id"
     super(*attrs, &block)
   end
-
-  # @!attribute [r] datum_id
-  #  @return [Fixnum] The index of the test case / data provided to the test
 
 protected
 
