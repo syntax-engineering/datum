@@ -25,7 +25,7 @@ bundle install
 ### Usage
 
 #### Data Driven Tests
-To get started, let's assume we have a very simple Person Model in app/models/person.rb:
+To get started, we'll use a simple Person Model in app/models/person.rb:
 
 ```ruby
 class Person < ActiveRecord::Base
@@ -44,7 +44,7 @@ class Person < ActiveRecord::Base
 end
 ```
 
-Now let's create a basic Person test in test/models/person_test.rb:
+Now let's create a model test in test/models/person_test.rb:
 
 ```ruby
 require 'test_helper'
@@ -56,7 +56,7 @@ class PersonTest < ActiveSupport::TestCase
 end
 ```
 
-When we execute this test, we get the following output:
+Executing the test:
 
 ```console
 # Running:
@@ -66,7 +66,7 @@ When we execute this test, we get the following output:
 1 runs, 1 assertions, 0 failures, 0 errors, 0 skips
 ```
 
-Now, let's say we want to make this test data-driven. First we'll go ahead and re-write our test:
+To convert this test to a data-driven data_test:
 
 ```ruby
 require 'test_helper'
@@ -83,7 +83,9 @@ class PersonTest < ActiveSupport::TestCase
 end
 ```
 
-Here we replace our fixed values with @datum.[attribute]. To define our Datum, we'll create a file test/datum/data/should_confirm_shortname.rb:
+In the data_test, the fixed values of the original test have been replaced with the usage of the @datum.[attribute] variable. For each dataset defined, the data_test will be called and @datum will provide access to the data.
+
+Next, we'll define our data in test/datum/data/should_confirm_shortname.rb:
 
 ```ruby
   # Sub-class the Datum struct with attributes we need for our test
@@ -94,7 +96,7 @@ Here we replace our fixed values with @datum.[attribute]. To define our Datum, w
   SimpleShortName.new "Homer", "Simpson", "Homer S."
 ```
 
-When we execute the data-driven test, we get the following output:
+Executing:
 
 ```console
 # Running:
@@ -104,18 +106,16 @@ When we execute the data-driven test, we get the following output:
 2 runs, 2 assertions, 0 failures, 0 errors, 0 skips
 ```
 
-Of course as we add datasets, more test cases are generated.
-
-test/datum/data/should_confirm_shortname.rb:
+Adding more datasets and thus more generated test cases: test/datum/data/should_confirm_shortname.rb:
 
 ```ruby
   SimpleShortName = Datum.new(:first_name, :last_name, :short_name)
 
   # Define instances for our test cases
-  SimpleShortName.new "Marge", "Simpson", "Marge S."
-  SimpleShortName.new "Homer", "Simpson", "Homer S."
-  SimpleShortName.new "Lisa", "Simpson", "Lisa S."
-  SimpleShortName.new "Bart", "Simpson", "Bart S."
+  SimpleShortName.new "Marge",  "Simpson", "Marge S."
+  SimpleShortName.new "Homer",  "Simpson", "Homer S."
+  SimpleShortName.new "Lisa",   "Simpson", "Lisa S."
+  SimpleShortName.new "Bart",   "Simpson", "Bart S."
   SimpleShortName.new "Maggie", "Simpson", "Maggie S."
 ```
 
