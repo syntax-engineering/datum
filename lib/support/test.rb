@@ -28,12 +28,16 @@ class ActiveSupport::TestCase
   end
 end
 
-# @!method data_test(name, &block)
-#   Defines a test to work in conjuction with Datum struct extensions found in
-#   a file with the same name in the test/datum/data directory
-#   @param [String] name Name of the file in the datum/data directory
-#   @param [Block] block A block of Ruby code
-#   @return [void]
+# Defines a test to work in conjuction with Datum struct extensions found in
+# a file with the same name in the test/datum/data directory
+#
+# @param [String] name Name of the file in the datum/data directory
+# @param [Block] block A block of Ruby code
+#
+# @return [void]
+#
+# @example Defining a data_test
+#   # test/datum/data/simple_person_test.rb
 def data_test name, &block
   ::Datum::Container.new(name, self)
   self.send(:define_method, name, &block)
