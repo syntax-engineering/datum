@@ -259,6 +259,43 @@ Executing the test:
 5 runs, 15 assertions, 0 failures, 0 errors, 0 skips
 ```
 
+### Real-World Examples (Not Finished)
+A Model Test to verify addresses from different countries:
+
+```ruby
+require 'test_helper'
+class AddressLabelTest < ActiveSupport::TestCase
+
+  # makes use of 'AddressLabel' Model
+  data_test 'should_verify_address_labels' do
+    # label = AddressLabel.create
+
+    #assert_equal @datum.
+    #assert_equal @datum.
+    #assert_equal @datum.
+  end
+end
+```
+
+A Functional Test to verify CRUD with different permissions:
+
+```ruby
+require 'test_helper'
+class AddressLabelTest < ActiveSupport::TestCase
+
+  # makes use of 'AddressLabel' Model
+  data_test 'should_verify_address_labels' do
+    # label = AddressLabel.create
+
+    #assert_equal @datum.
+    #assert_equal @datum.
+    #assert_equal @datum.
+  end
+end
+```
+
+
+
 ### License
 
 MIT License. Copyright 2012-2015 Tyemill. http://tyemill.com
