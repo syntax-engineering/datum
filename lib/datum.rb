@@ -5,6 +5,8 @@ require "datum/container"
 require "support/test"
 require "support/scenario"
 
+require 'datum/railtie'
+
 # Datum is a flexible data-driven test solution for Rails.
 #
 # Datum's primary features include defining data-driven tests via the

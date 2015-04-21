@@ -22,6 +22,12 @@ Next run the bundle command:
 bundle install
 ```
 
+To create the default datum directories:
+
+```console
+rake datum:install
+```
+
 ### Simple Examples
 
 #### data_test: Data Driven Tests for Rails
