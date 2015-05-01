@@ -1,6 +1,6 @@
 module Datum
   # @!visibility private
-  VERSION = "4.0.6"
+  VERSION = "4.0.7"
 end
 
 
@@ -12,3 +12,6 @@ end
 ##
 ## 4.0.x
 ## Several small updates (readme, etc) -- Readme still needs work.
+## 4.0.6
+## Seems like the build process was dead on arrival? Trying a re-build .7
+## 4.0.7
