@@ -4,6 +4,7 @@ require "datum/datum"
 require "datum/container"
 require "support/test"
 require "support/scenario"
+require "datum/railtie"
 
 # Datum is a flexible data-driven test solution for Rails.
 #
