@@ -50,7 +50,7 @@ class Helpers
     # @param [Pathname] directory A Pathname representing the file's directory
     # @param [Binding] current_binding Context at a particular code location
     def import_file file_name, directory, current_binding
-      eval(read_file(file_name, directory), current_binding)
+      current_binding.eval(read_file(file_name, directory))
     end
 
     # @!visibility private
