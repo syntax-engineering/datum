@@ -23,8 +23,36 @@ require "datum/datum"
 class ActiveSupport::TestCase
   include Datum
 
-  def process_scenario scenario_name
-    __import(scenario_name)
+  def after_setup
+    process_queued_scenarios
+    super
+  end
+
+  def queue_scenario scenario_name
+    @@queued_scenarios = [] if @@queued_scenarios.nil?
+    @@queued_scenarios << scenario_name
+  end
+
+  def process_scenario scenario_name, use_db_transaction: false
+    if use_db_transaction
+      ActiveRecord::Base.transaction do
+        __import(scenario_name)
+      end
+    else
+      __import(scenario_name)
+    end
+  end
+
+  def process_queued_scenarios
+    unless @@queued_scenarios.blank?
+      puts 'queued scenarios present'
+      ActiveRecord::Base.transaction do
+        @@queued_scenarios.each do |scenario_name|
+          process_scenario scenario_name
+        end
+      end
+    end
+    @@queued_scenarios = []
   end
 end
 

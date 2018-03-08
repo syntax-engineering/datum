@@ -12,7 +12,7 @@ require "datum/railtie"
 # data_test method and Scenarios, a load-on-demand mechanism for seeding the
 # test database.
 module Datum
-  @@all_containers, @@scenario_path, @@data_path, @@datum_path = nil
+  @@all_containers, @@scenario_path, @@data_path, @@datum_path, @@queued_scenarios = nil
 
   class << self
 
