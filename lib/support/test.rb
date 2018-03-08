@@ -33,7 +33,7 @@ class ActiveSupport::TestCase
     @@queued_scenarios << scenario_name
   end
 
-  def process_scenario scenario_name, use_db_transaction: false
+  def process_scenario scenario_name, use_db_transaction = false
     if use_db_transaction
       ActiveRecord::Base.transaction do
         __import(scenario_name)
