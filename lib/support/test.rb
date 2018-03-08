@@ -33,6 +33,10 @@ class ActiveSupport::TestCase
     @@queued_scenarios << scenario_name
   end
 
+  def queued_scenarios
+    @@queued_scenarios
+  end
+
   def process_scenario scenario_name, use_db_transaction = false
     if use_db_transaction
       ActiveRecord::Base.transaction do
@@ -43,7 +47,8 @@ class ActiveSupport::TestCase
     end
   end
 
-  def process_scenarios scenarios
+  def process_scenarios scenarios = nil
+    scenarios = queued_scenarios if scenarios.blank?
     unless scenarios.blank?
       ActiveRecord::Base.transaction do
         scenarios.each do |scenario_name|
@@ -51,7 +56,8 @@ class ActiveSupport::TestCase
         end
       end
     end
-    scenarios = []
+    # empty the queued scenarios once they've been processed
+    @@queued_scenarios = [] if scenarios == @@queued_scenarios
   end
 end
 
