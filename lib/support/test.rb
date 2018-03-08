@@ -45,7 +45,6 @@ class ActiveSupport::TestCase
 
   def process_queued_scenarios
     unless @@queued_scenarios.blank?
-      puts 'queued scenarios present'
       ActiveRecord::Base.transaction do
         @@queued_scenarios.each do |scenario_name|
           process_scenario scenario_name
