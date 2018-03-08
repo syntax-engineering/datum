@@ -24,7 +24,7 @@ class ActiveSupport::TestCase
   include Datum
 
   def after_setup
-    process_queued_scenarios
+    process_scenarios @@queued_scenarios
     super
   end
 
@@ -43,15 +43,15 @@ class ActiveSupport::TestCase
     end
   end
 
-  def process_queued_scenarios
-    unless @@queued_scenarios.blank?
+  def process_scenarios scenarios
+    unless scenarios.blank?
       ActiveRecord::Base.transaction do
-        @@queued_scenarios.each do |scenario_name|
+        scenarios.each do |scenario_name|
           process_scenario scenario_name
         end
       end
     end
-    @@queued_scenarios = []
+    scenarios = []
   end
 end
 
