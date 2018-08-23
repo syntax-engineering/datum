@@ -19,7 +19,9 @@ module Datum
     # @!attribute [r] path
     # Fully qualified path for the root of datum directory
     # @return [Pathname]
-    def path; @@datum_path ||= Pathname.new(File.expand_path("../../test/datum", __FILE__)) end
+    def path
+      @@datum_path ||= Pathname.new($RAILS_ROOT || Dir.pwd).join("test", "datum")
+    end
 
     # @!attribute [r] data_path
     # Fully qualified path for the datum/data directory
