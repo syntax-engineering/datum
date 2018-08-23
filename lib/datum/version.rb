@@ -1,6 +1,6 @@
 module Datum
   # @!visibility private
-  VERSION = "4.1.6"
+  VERSION = "4.1.7"
 end
 
 
