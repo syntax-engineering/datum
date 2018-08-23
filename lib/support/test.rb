@@ -28,9 +28,11 @@ binding_class = if defined? ActiveSupport::TestCase
                 end
 
 if binding_class
-  binding_class.include Datum
-  binding_class.define_method :process_scenario do |scenario_name|
-    __import scenario_name
+  binding_class.class_eval do
+    include Datum
+    define_method :process_scenario do |scenario_name|
+      __import scenario_name
+    end
   end
 end
 
