@@ -61,7 +61,7 @@ private
     private
     def configure_attributes
       @container = ::Datum.send(:current_container)
-      (dtm_id, @test_method_name = @container.send(:add_datum, self))[0]
+      (_dtm_id, @test_method_name = @container.send(:add_datum, self))[0]
     end
   end
   end

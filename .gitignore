@@ -77,3 +77,4 @@ test/dummy/db/schema.sql
 .tags
 .tags_sorted_by_file
 .gemtags
+Gemfile.lock

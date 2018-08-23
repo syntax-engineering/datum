@@ -20,11 +20,17 @@ require "datum/datum"
 #       assert_not_nil @homer, "process_scenario did not define @homer"
 #       assert_not_nil @marge, "process_scenario did not define @marge"
 #     end
-class ActiveSupport::TestCase
-  include Datum
 
-  def process_scenario scenario_name
-    __import(scenario_name)
+binding_class = if defined? ActiveSupport::TestCase
+                  ActiveSupport::TestCase
+                elsif defined? Minitest::Test
+                  Minitest::Test
+                end
+
+if binding_class
+  binding_class.include Datum
+  binding_class.define_method :process_scenario do |scenario_name|
+    __import scenario_name
   end
 end
 
