@@ -21,13 +21,19 @@ require "datum/datum"
 #       assert_not_nil @marge, "process_scenario did not define @marge"
 #     end
 
-binding_class = if defined? ActiveSupport::TestCase
-                  ActiveSupport::TestCase
-                elsif defined? Minitest::Test
-                  Minitest::Test
-                end
+binding_classes = [].tap do |klasses|
+  if defined? ActiveSupport::TestCase
+    klasses << ActiveSupport::TestCase
+  end
 
-if binding_class
+  if defined? Minitest::Test
+    klasses << Minitest::Test
+  end
+end
+
+binding_classes.each do |binding_class|
+  next unless defined? binding_class
+
   binding_class.class_eval do
     include Datum
     define_method :process_scenario do |scenario_name|
