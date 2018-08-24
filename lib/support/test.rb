@@ -32,8 +32,6 @@ binding_classes = [].tap do |klasses|
 end
 
 binding_classes.each do |binding_class|
-  next unless defined? binding_class
-
   binding_class.class_eval do
     include Datum
     define_method :process_scenario do |scenario_name|
