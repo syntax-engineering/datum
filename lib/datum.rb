@@ -1,4 +1,5 @@
 
+require "pathname"
 require "datum/helpers"
 require "datum/datum"
 require "datum/container"

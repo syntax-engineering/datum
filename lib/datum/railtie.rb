@@ -10,6 +10,6 @@ begin
       end
     end
   end
-rescue LoadError => error
+rescue LoadError => _error
   # do nothing
 end
