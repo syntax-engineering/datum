@@ -1,5 +1,6 @@
+begin
+  require 'rails'
 
-if require 'rails'
   module Datum
     # @!visibility private
     class Railtie < Rails::Railtie
@@ -9,4 +10,6 @@ if require 'rails'
       end
     end
   end
+rescue LoadError => error
+  # do nothing
 end
