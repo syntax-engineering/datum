@@ -20,7 +20,8 @@ module Datum
     # Fully qualified path for the root of datum directory
     # @return [Pathname]
     def path
-      @@datum_path ||= Pathname.new($RAILS_ROOT || Dir.pwd).join("test", "datum")
+      root = defined?($RAILS_ROOT) ? $RAILS_ROOT : Dir.pwd
+      @@datum_path ||= Pathname.new(root).join("test", "datum")
     end
 
     # @!attribute [r] data_path

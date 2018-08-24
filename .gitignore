@@ -62,6 +62,7 @@ pickle-email-*.html
 *.sublime-workspace
 *.bak
 *.glue
+*.gem
 
 # ignore specific files
 .powenv
