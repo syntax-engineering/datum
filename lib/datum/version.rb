@@ -1,6 +1,6 @@
 module Datum
   # @!visibility private
-  VERSION = "4.1.6"
+  VERSION = "4.2.0"
 end
 
 
@@ -22,3 +22,5 @@ end
 ## Removing railtie and rake task
 ## 4.1.0
 ## Removing files.
+## 4.2.0
+## Support added for gems.

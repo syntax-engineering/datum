@@ -1,4 +1,5 @@
 
+require "pathname"
 require "datum/helpers"
 require "datum/datum"
 require "datum/container"
@@ -19,7 +20,10 @@ module Datum
     # @!attribute [r] path
     # Fully qualified path for the root of datum directory
     # @return [Pathname]
-    def path; @@datum_path ||= Rails.root.join('test', 'datum'); end
+    def path
+      root = defined?($RAILS_ROOT) ? $RAILS_ROOT : Dir.pwd
+      @@datum_path ||= Pathname.new(root).join("test", "datum")
+    end
 
     # @!attribute [r] data_path
     # Fully qualified path for the datum/data directory
