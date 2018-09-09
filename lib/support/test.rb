@@ -6,20 +6,19 @@ module Datum
   module Test
     module InstanceMethods
       class << self
-        @@queued_scenarios = []
+        include ::Datum
 
         def included(base)
           base.extend(Test::ClassMethods)
         end
       end
 
-
       def queued_scenarios
-        @@queued_scenarios
+        @queued_scenarios ||= []
       end
 
       def queued_scenarios=(scenarios)
-        @@queued_scenarios = scenarios
+        @queued_scenarios = scenarios
       end
 
       def after_setup
@@ -135,6 +134,5 @@ binding_classes = [].tap do |klasses|
 end
 
 binding_classes.each do |binding_class|
-  binding_class.send(:include, Datum)
   binding_class.send(:include, Datum::Test::InstanceMethods)
 end
