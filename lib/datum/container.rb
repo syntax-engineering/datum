@@ -49,31 +49,30 @@ class Container
   def initialize(data_method_name, tst_instance)
     @data_method_name = data_method_name; @test_instance = tst_instance
     @loaded_data = {}; @invoked_data = {}
-    ::Datum.send(:add_container, self,
-      Container.key(@test_instance, @data_method_name))
+    ::Datum.add_container(self, Container.key(@test_instance, @data_method_name))
   end
 
-private
+  def invoke_datum(key, tst_case)
+    @invoked_data[key] = datum = @loaded_data.delete(key)
+    tst_case.instance_variable_set :@datum, datum
+    tst_case.send datum.container.data_method_name
+  end
 
-  def add_datum datum
+  def add_datum(datum)
     test_name = Helpers.build_test_name(data_method_name, test_count + 1)
     @loaded_data[Datum.key(test_instance, test_name)] = datum
     add_data_test test_name
     [count, test_name]
   end
 
-  def invoke_datum key, tst_case
-    @invoked_data[key] = datum = @loaded_data.delete(key)
-    tst_case.instance_variable_set :@datum, datum
-    tst_case.send datum.container.data_method_name
-  end
+private
 
   def add_data_test test_name
     test_instance.send(:define_method, test_name) do
       datum_key = Datum.key(nm = self.class.to_s, __method__)
       container_key = Container.key(nm,
         Helpers.data_method_from_test_name(__method__))
-      ::Datum.containers[container_key].send(:invoke_datum, datum_key, self)
+      ::Datum.containers[container_key].invoke_datum(datum_key, self)
     end
   end
 

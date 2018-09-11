@@ -6,8 +6,6 @@ module Datum
   module Test
     module InstanceMethods
       class << self
-        include ::Datum
-
         def included(base)
           base.extend(Test::ClassMethods)
         end
@@ -105,7 +103,7 @@ module Datum
 end
 
 # Adds the process_scenario method to ActiveSupport::TestCase and includes
-# the Datum module
+# the Datum and Datum::Support::Test modules
 # @note Supports most extending test types (functional, integration, etc)
 # @example Making a Scenario
 #   # test/datum/scenarios/simpsons_scenario.rb
@@ -134,5 +132,6 @@ binding_classes = [].tap do |klasses|
 end
 
 binding_classes.each do |binding_class|
-  binding_class.send(:include, Datum::Test::InstanceMethods)
+  binding_class.include(Datum)
+  binding_class.include(Datum::Test::InstanceMethods)
 end

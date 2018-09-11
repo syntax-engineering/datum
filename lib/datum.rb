@@ -40,7 +40,6 @@ module Datum
     # @return [Hash]
     def containers; @@all_containers ||= {}; end
 
-  private
     def add_container container, key
       ::Datum.containers[key] = container
       ::Datum.instance_variable_set(:"@current_container", container)
