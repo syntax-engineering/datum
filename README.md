@@ -265,6 +265,58 @@ Executing the test:
 5 runs, 15 assertions, 0 failures, 0 errors, 0 skips
 ```
 
+#### Transactional Testing with Scenarios
+##### New in version 4.3.0
+
+Datum out of the box is built to support Rails' transactional tests and fixtures. One thing,
+you may notice though, is that when using scenarios with lots of data,
+loading scenario data for each test case can become very time consuming.
+When utilizing `data_test`s with large scenarios this can cause you test suite run time to balloon.
+
+To improve this there's the `Datum::Transactions` module. This adds a method, `load_scenarios`,
+which can be used in your test class to a set of scenarios once for each test case in the class.
+This is acheived by utilizing Database Cleaner and Mintest Hooks. Rails' default transactional
+fixtures are disabled and new transactions are created around the test class and each test case.
+
+
+Gemfile:
+``` ruby
+gem 'database_cleaner'
+```
+
+test_helper.rb:
+```ruby
+require 'datum/transactions'
+
+class ActiveSupport::TestCase
+  include ::Datum::Transactions
+end
+
+class MyClassTest < ActiveSupport::TestCase
+
+  def load_scenarios
+    process_scenario 'my_scenario'
+  end
+end
+```
+
+##### Disabling for Specific Tests
+
+```ruby
+DatabaseCleaner.strategy = :truncation
+
+class ActionDispatch::IntegrationTest
+  self.datum_transactions = false
+end
+```
+
+##### Gotchas
+
+In order to correctly setup instance state after each test case run instance
+state is snapshotted after load_scenarios is processed and Marshaled. This limits the
+type of objects that can be processed in these scenarios. These scenarios can still be
+processed in a setup method or test case however.
+
 ### Real-World Examples (Not Finished)
 A Model Test to verify addresses from different countries:
 

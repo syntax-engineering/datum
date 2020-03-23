@@ -1,6 +1,7 @@
 require "datum/helpers"
 require "datum/container"
 require "datum/datum"
+require 'minitest/hooks/test'
 
 # Adds the process_scenario method to ActiveSupport::TestCase and includes
 # the Datum module
@@ -21,22 +22,12 @@ require "datum/datum"
 #       assert_not_nil @marge, "process_scenario did not define @marge"
 #     end
 
-binding_classes = [].tap do |klasses|
-  if defined? ActiveSupport::TestCase
-    klasses << ActiveSupport::TestCase
-  end
+class Minitest::Test
+  include Datum
+  include Minitest::Hooks
 
-  if defined? Minitest::Test
-    klasses << Minitest::Test
-  end
-end
-
-binding_classes.each do |binding_class|
-  binding_class.class_eval do
-    include Datum
-    define_method :process_scenario do |scenario_name|
-      __import scenario_name
-    end
+  define_method :process_scenario do |scenario_name|
+    __import scenario_name
   end
 end
 
