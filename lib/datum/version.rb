@@ -1,6 +1,6 @@
 module Datum
   # @!visibility private
-  VERSION = "4.2.0"
+  VERSION = "4.3.0"
 end
 
 
@@ -24,3 +24,5 @@ end
 ## Removing files.
 ## 4.2.0
 ## Support added for gems.
+## 4.3.0
+## Add load_scenarios and both test and test class level transactions
