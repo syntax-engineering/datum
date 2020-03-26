@@ -10,7 +10,6 @@ module Datum
         class_attribute :datum_transactions
         self.datum_transactions = true
       end
-      klass.use_transactional_fixtures = false
     end
 
     def load_scenarios
@@ -31,9 +30,7 @@ module Datum
       return super unless self.class.datum_transactions
 
       restore_ivars
-      DatabaseCleaner.cleaning do
-        super
-      end
+      super
     end
 
     def record_ivars
