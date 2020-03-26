@@ -1,6 +1,6 @@
 module Datum
   # @!visibility private
-  VERSION = "4.3.0"
+  VERSION = "4.3.1"
 end
 
 
@@ -26,3 +26,6 @@ end
 ## Support added for gems.
 ## 4.3.0
 ## Add load_scenarios and both test and test class level transactions
+## 4.3.1
+## Use rails default transactions for test methods. This should make it easier to
+## support multiple rails versions.
