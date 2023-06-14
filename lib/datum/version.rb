@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 module Datum
   # @!visibility private
-  VERSION = "4.3.1"
+  VERSION = '4.3.2'
 end
-
 
 ## 0.8.1 - 0.9.2
 ## Original datum, proof-of-concept
@@ -29,3 +30,5 @@ end
 ## 4.3.1
 ## Use rails default transactions for test methods. This should make it easier to
 ## support multiple rails versions.
+## 4.3.2
+## Test package release workflow
