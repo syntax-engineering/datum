@@ -2,7 +2,7 @@
 
 module Datum
   # @!visibility private
-  VERSION = '4.3.2.2'
+  VERSION = '4.3.3'
 end
 
 ## 0.8.1 - 0.9.2
@@ -30,5 +30,7 @@ end
 ## 4.3.1
 ## Use rails default transactions for test methods. This should make it easier to
 ## support multiple rails versions.
-## 4.3.2
+## 4.3.2, 4.3.2.1, 4.3.2.2
 ## Test package release workflow
+## 4.3.3
+## Finalize package release workflow

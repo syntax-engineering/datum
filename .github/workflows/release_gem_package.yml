@@ -2,8 +2,8 @@
 name: Release Gem Package
 on:
   push:
-    # branches:
-    #   - main
+    branches:
+      - master
     paths:
       - 'lib/datum/version.rb'
 
