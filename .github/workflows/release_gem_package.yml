@@ -2,13 +2,10 @@
 name: Release Gem Package
 on:
   push:
-    branches:
-      - master
+    # branches:
+    #   - master
     paths:
       - 'lib/datum/version.rb'
-
-env:
-  BUNDLE_RUBYGEMS__PKG__GITHUB__COM: ${{ secrets.BUNDLE_RUBYGEMS__PKG__GITHUB__COM }}
 
 jobs:
   build:
