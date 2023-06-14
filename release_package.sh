@@ -1,5 +1,5 @@
 # Get latest gem version
-GEM_VERSION=$(grep -o "'.*'"  lib/flow/version.rb | tr -d "'")
+GEM_VERSION=$(grep -o "'.*'"  lib/datum/version.rb | tr -d "'")
 
 # create tag based on latest gem version
 TAG="v$GEM_VERSION"
