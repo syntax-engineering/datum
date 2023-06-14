@@ -2,7 +2,7 @@
 
 module Datum
   # @!visibility private
-  VERSION = '4.3.2.3'
+  VERSION = '4.3.3'
 end
 
 ## 0.8.1 - 0.9.2
